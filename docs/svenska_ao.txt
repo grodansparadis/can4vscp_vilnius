@@ -1,0 +1,26 @@
+Vilnius 5VA0 är en 5 kanals A/D omvandlare som mäter 0-5V med 10-bitars upplösning på varje kanal. Enheten finns i två varianter. En som kan
+fästas på DIN skena och en variant som kan skruvas på vägg.
+
+Vilnius 5VA0 modulens fem A/D kanaler kan styras separat från varandra. Det är möjligt att få event (meddelande heter event i VSCP) när värdet på
+en kanal ändrar sitt värde (inställbar hysteresis). Man kan får periodisk event med värdet för kanalen och man kan få en ström av event med mätvärden.
+Det är dessutom möjligt att ställa en högt respektive låg alarmnivå och få ett larmevent om den över respektive underskrids. Det är dessutom möjligt att
+låta modulen linjäranpassa de uppmäta A/D värdena innan de skickas vidare. Modulen har en decision matrix som kan användas för att skicka ut mätvärden
+när ett programmerat event erhålls av modulen.
+
+Typisk användningsområde för enheten är att mäta en spänning som på något vis behöver övervakas eller loggas. Med yttre anpassning i form av motstånd
+eller dyligt kan i princip alla spänningar mätas.
+
+Vilnius 5VA0 är en CAN4VSCP modul och följer VSCP standarden. Det betyder att den kan arbeta självständigt eller tillsammans med en server och att alla
+programvaror och kodbibliotek som finns i VSCP projektet direkt fungerar tillsammans med den. Som alla CAN4VSCP moduler så strömförsörjs enheten över
+bussen med en 9-30V strömkälla.
+
+Vilnius 5VA0 ansluts till bussen med en RJ45 kontakt. Lämpligen använder man CAT-5 eller bättre partvinnad kabel. Strömförsörjningen sker också genom denna
+kabel så det finns inget behov för en separat strömkälla. Maximala kabellängden ligger på runt 500 meter med dropkabellängder på max 24 meter. Som för
+all CAN4VSCP moduler används 125 kbps som kommunikationshastighet.
+
+Alla VSCP enheter innehåller information om sin egen konfiguration, inställningar, manual, drivare, version, tillverkare etc. Man behöver bara fråga
+modulen om den information man är intresserad av. När VSCP enheter startas upp har dom alltid en förprogrammerad standardfunktionalitet.
+
+Firmware i enheten, som är öppen källkod, kan uppdateras över nätet.
+
+Se produktsidan för fullständig information.

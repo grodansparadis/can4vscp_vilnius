@@ -1,0 +1,271 @@
+Villnius - 5A
+=============
+
+0 - Zone for Vilnius module.
+1 - Subzone for module.
+
+2 - Zone for A/D channel 0.
+3 - Subzone for A/D channel 0.
+4 - Zone for A/D channel 1.
+5 - Subzone for A/D channel 1.
+6 - Zone for A/D channel 2.
+7 - Subzone for A/D channel 2.
+8 - Zone for A/D channel 3.
+9 - Subzone for A/D channel 3.
+10 - Zone for A/D channel 4.
+11 - Subzone for A/D channel 4.
+
+12 - Control register channel 0.
+	The channel control bits enable/disable intelligent channel functionality
+		Bit 0 - Enable Event on change.	
+		Bit 1 - Enable periodic events.
+		Bit 2 - Enable stream.
+		Bit 3 -
+		Bit 4 -
+		Bit 5 - Enable Low Alarm
+		Bit 6 - Enable High Alarm
+		Bit 7 -
+13 - Control register channel 1.
+14 - Control register channel 2.
+15 - Control register channel 3.
+16 - Control register channel 4.		
+
+17 - MSB of A/D value for channel 0. Read Only.	
+18 - LSB of A/D value for channel 0. Read Only.
+19 - MSB of A/D value for channel 1. Read Only.
+20 - LSB of A/D value for channel 1. Read Only.
+21 - MSB of A/D value for channel 2. Read Only.
+22 - LSB of A/D value for channel 2. Read Only.
+23 - MSB of A/D value for channel 3. Read Only.
+24 - LSB of A/D value for channel 3. Read Only.
+25 - MSB of A/D value for channel 4. Read Only.
+26 - LSB of A/D value for channel 4. Read Only.
+
+27 - On/off sample time Channel 0 (milli-seconds) MSB. Read/Write
+28 - On/off sample time Channel 0 (milli-seconds) LSB. Read/Write
+29 - On/off sample time Channel 1 (milli-seconds) MSB. Read/Write
+30 - On/off sample time Channel 1 (milli-seconds) LSB. Read/Write
+31 - On/off sample time Channel 2 (milli-seconds) MSB. Read/Write
+32 - On/off sample time Channel 2 (milli-seconds) LSB. Read/Write
+33 - On/off sample time Channel 3 (milli-seconds) MSB. Read/Write
+34 - On/off sample time Channel 3 (milli-seconds) LSB. Read/Write  
+35 - On/off sample time Channel 4 (milli-seconds) MSB. Read/Write
+36 - On/off sample time Channel 4 (milli-seconds) LSB. Read/Write
+
+This is the sample time for the each channel expressed in milli-seconds. 
+The min sample time is 10 milli-seconds and the max time is 65535 mili-seconds which 
+is about 1 minute. Set to zero (default) for no sample time.
+
+If periodic events are enabled they will be sent with the period set here.
+
+If event on change is enabled they will be sent with the period set here if the 
+value has changed since the last read with a hysteresis set in the hysteresis register.
+
+If stream is enabled stream events will be sent out when the stream buffer is full 
+(2 samples).
+
+If A/D change values are enabled be careful not to have a low sample period as this 
+will most certain flood the bus.
+
+37 -  Hysteresis for a changed value. Read/Write.	
+
+Alarm Levels
+
+38 - MSB low alarm level for channel 0. Read/Write.
+39 - LSB low alarm level for channel 0. Read/Write.
+40 - MSB low alarm level for channel 1. Read/Write.
+41 - LSB low alarm level for channel 1. Read/Write.
+42 - MSB low alarm level for channel 2. Read/Write.
+43 - LSB low alarm level for channel 2. Read/Write.
+44 - MSB low alarm level for channel 3. Read/Write.
+45 - LSB low alarm level for channel 3. Read/Write.
+46 - MSB low alarm level for channel 4. Read/Write.
+47 - LSB low alarm level for channel 4. Read/Write.
+
+An alarm event will be sent out if the A/D channel is lower then this value. 
+Alarm state is reseted for level + hysterersis. 
+Flag must also be set to generate alarm.
+
+48 - MSB high alarm level for channel 0. Read/Write.
+49 - LSB high alarm level for channel 0. Read/Write.
+50 - MSB high alarm level for channel 1. Read/Write.
+51 - LSB high alarm level for channel 1. Read/Write.
+52 - MSB high alarm level for channel 2. Read/Write.
+53 - LSB high alarm level for channel 2. Read/Write.
+54 - MSB high alarm level for channel 3. Read/Write.
+55 - LSB high alarm level for channel 3. Read/Write.
+56 - MSB high alarm level for channel 4. Read/Write.
+57 - LSB high alarm level for channel 4. Read/Write.
+
+An alarm event will be sent out if the A/D channel is higher then this value. 
+Alarm state is reseted for level - hysterersis. Flag must also be set to generate alarm.
+
+Scaling
+
+58 - MSB scaling 'k' for channel 0 forming a signed integer. Read/Write.
+59 - LSB scaling 'k' for channel 0 forming a signed integer. Read/Write.
+60 - MSB scaling 'k' for channel 1 forming a signed integer. Read/Write.
+61 - LSB scaling 'k' for channel 1 forming a signed integer. Read/Write.
+62 - MSB scaling 'k' for channel 2 forming a signed integer. Read/Write.
+63 - LSB scaling 'k' for channel 2 forming a signed integer. Read/Write.
+64 - MSB scaling 'k' for channel 3 forming a signed integer. Read/Write.
+65 - LSB scaling 'k' for channel 3 forming a signed integer. Read/Write.
+66 - MSB scaling 'k' for channel 4 forming a signed integer. Read/Write.
+67 - LSB scaling 'k' for channel 4 forming a signed integer. Read/Write.
+
+68 - MSB scaling 'm' for channel 0 forming a signed integer. Read/Write.
+69 - LSB scaling 'm' for channel 0 forming a signed integer. Read/Write.
+70 - MSB scaling 'm' for channel 1 forming a signed integer. Read/Write.
+71 - LSB scaling 'm' for channel 1 forming a signed integer. Read/Write.
+72 - MSB scaling 'm' for channel 2 forming a signed integer. Read/Write.
+73 - LSB scaling 'm' for channel 2 forming a signed integer. Read/Write.
+74 - MSB scaling 'm' for channel 3 forming a signed integer. Read/Write.
+75 - LSB scaling 'm' for channel 3 forming a signed integer. Read/Write.
+76 - MSB scaling 'm' for channel 4 forming a signed integer. Read/Write.
+77 - LSB scaling 'm' for channel 4 forming a signed integer. Read/Write.
+
+78 - Datacoding for channel 0. Read/Write.
+79 - Datacoding for channel 1. Read/Write.
+80 - Datacoding for channel 2. Read/Write.
+81 - Datacoding for channel 3. Read/Write.
+82 - Datacoding for channel 4. Read/Write.
+
+Datacoding can be normalized integer
+
+83 - Measurement type for channel 0. Read/Write.
+84 - Measurement type for channel 1. Read/Write.
+85 - Measurement type for channel 2. Read/Write.
+86 - Measurement type for channel 3. Read/Write.
+87 - Measurement type for channel 4. Read/Write.
+
+88 - Signed char for number of decimals for channel 0. Read/Write.
+89 - Signed char for number of decimals for channel 1. Read/Write.
+90 - Signed char for number of decimals for channel 2. Read/Write.
+91 - Signed char for number of decimals for channel 3. Read/Write.
+92 - Signed char for number of decimals for channel 4. Read/Write.
+
+The scaling is used with the formula
+
+value = k * A/D-value + m
+
+where value is calculated as a signed long (4 bytes).
+
+The value is always sent as a normalized integer of Class=10 (0x0a) Measurement. 
+The datacoding is should be set to 0b100xx000 where xx is the type for the measurement 
+(0b00 if default) see http://www.vscp.org/wiki/doku.php?id=vscp_specification_data_coding.
+
+Finally the measurement type is one of the types defined for Class=10 (0x0a) Measurement.
+
+Temperature sensor
+------------------
+
+55 - Control byte for temperature sensor
+	Bit 0,1 - Temperature unit
+		00 - Kelvin.
+		01 - Celsius (default).
+		10 - Fahrenheit.
+	Bit 2 - Reserved
+	Bit 3 - Enable low alarm.
+	Bit 4 - Enable high alarm.
+	Bit 5 - Send ON/OFF events instead of Alarm
+	Bit 6 - on/off event usage
+			0 - TurnOn event is sent when low temp is reached. TurnOff event
+				when high temp. is reached.
+			1 - TurnOff event is sent when low temp is reached. TurnOff event
+				is sent when high temp. is reached.
+	Bit 7 - Enable temperature events.
+56 - Temperature temperature sensor MSB (on board sensor)
+57 - Temperature temperature sensor LSB (on board sensor)	
+58 - Report interval for temperature sensor in seconds. (Set to zero for no report)
+59 - Low alarm temperature Sensor MSB
+60 - Low alarm temperature Sensor LSB
+61 - High alarm temperature Sensor MSB
+62 - High alarm temperature Sensor LSB
+63 - Hysteresis low temperature for temperature sensor.
+64 - Hysteresis high temperature for temperature sensor.
+65 - Zone form temperature sensor alarms.
+66 - Subzone for temperature sensor alarms.
+67 - Absolut low for temperature sensor MSB. Write to reset.
+68 - Absolut low for temperature sensor LSB. Write to reset.
+69 - Absolut high for temperature sensor MSB. Write to reset.
+70 - Absolut high for temperature sensor LSB. Write to reset.
+
+71 - 127 - Decision Matrix (Eight elements).
+
+
+Alarm register bits
+===================
+bit 0 - Low temperature alarm.
+bit 1 - High temperature alarm.
+
+
+Events
+======
+
+A/D value
+---------
+
+Can be sent on configurable intervals or on value changes.
+
+Class: 0x015 
+Type: 0x02
+
+Package:
+
+Byte 0: Data coding: 0xc0 + channel.
+Byte 1: MSB of A/D value.
+Byte 2: LSB of A/D value.
+
+Alarm
+-----
+
+If enabled the event is sent when a channel goes from active to inactive.
+
+Class: 0x001 
+Type: 0x02
+
+Package:
+
+Byte 0: index.
+Byte 1: Zone
+Byte 2: Subzone
+
+Index is 0 for channel 0, 1 for channel 1 and so on.
+
+Stream Data with zone
+---------------------
+
+A stream event is sent on intervals to report I/O channel state.
+
+Class: 0x014 
+Type: 0x26
+
+Package:
+
+Byte 0: Zone
+Byte 1: Subzone
+Byte 2: Index
+Byte 3: MSB of A/D value sample i
+Byte 4: LSB of A/D value sample i+1
+Byte 5: MSB of A/D value sample i+2
+Byte 6: LSB of A/D value sample i+3  
+
+Index is increase for every event sent out.
+
+
+Temperature measurement
+-----------------------
+Class=10, Type=6
+
+Alarm
+-----
+Class=1, Type=2 - Alarm occured
+Sensor index in byte 0 (0-5)
+
+TurnOn
+------
+Class=30, Type=5
+
+TurnOff
+-------
+Class=30, Type=6

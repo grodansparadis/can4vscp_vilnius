@@ -1,0 +1,75 @@
+Vilnius notes
+=============
+
+Registers
+=========
+00	Zone
+01	Subzone
+02	Control register A/D 0
+		Bit 0 - Enable
+		Bit 1 - Enable event when above level
+		Bit 2 - Enable event when below level
+		Bit 3 - 
+		Bit 4 - 
+		Bit 5 - 
+		Bit 6 -
+		Bit 7 -  	
+03	Control register A/D 1
+04	Control register A/D 2
+05	Control register A/D 3
+06	Control register A/D 4
+
+
+07	Level high for channel 0 MSB   (0-10V * 10000)
+08	Level high for channel 0 LSB
+09	Level high for channel 1 MSB
+0A	Level high for channel 1 LSB
+0B	Level high for channel 2 MSB
+0C	Level high for channel 2 LSB
+0D	Level high for channel 3 MSB
+0E	Level high for channel 3 LSB
+0F	Level high for channel 4 MSB
+10	Level high for channel 5 LSB
+
+11	Level low for channel 0 MSB   (0-10V * 10000)
+12	Level low for channel 0 LSB
+13	Level low for channel 1 MSB
+14	Level low for channel 1 LSB
+15	Level low for channel 2 MSB
+16	Level low for channel 2 LSB
+17	Level low for channel 3 MSB
+18	Level low for channel 3 LSB
+19	Level low for channel 4 MSB
+1A	Level low for channel 5 LSB
+
+1B	Absolute low for channel 0 MSB   (0-10V * 10000)
+1C	Absolute low for channel 0 LSB
+1D	Absolute low for channel 1 MSB
+1E	Absolute low for channel 1 LSB
+1F	Absolute low for channel 2 MSB
+20	Absolute low for channel 2 LSB
+21	Absolute low for channel 3 MSB
+22	Absolute low for channel 3 LSB
+23	Absolute low for channel 4 MSB
+24	Absolute low for channel 5 LSB
+
+25	Absolute high for channel 0 MSB   (0-10V * 10000)
+26	Absolute high for channel 0 LSB
+27	Absolute high for channel 1 MSB
+28	Absolute high for channel 1 LSB
+29	Absolute high for channel 2 MSB
+2A	Absolute high for channel 2 LSB
+2B	Absolute high for channel 3 MSB
+2C	Absolute high for channel 3 LSB
+2D	Absolute high for channel 4 MSB
+2E	Absolute high for channel 5 LSB
+
+A/D stream frequency
+Event above level
+Event below level
+hysteresis.
+
+Actions
+=======
+0	NOOP
+1	Send state. (for sync)

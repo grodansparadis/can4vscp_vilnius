@@ -1,0 +1,25 @@
+EAGLE Version 4.15 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check for D:/dev/can/can/src/vscp/firmware/pic/AD/eagle/smdad002.sch at  1/11/2006 03:50:42p
+
+WARNING: Sheet 1/1: SUPPLY Pin VDD overwritten with VCC
+WARNING: Sheet 1/1: SUPPLY Pin VSS overwritten with GND
+WARNING: Sheet 1/1: SUPPLY Pin V+ overwritten with VCC
+WARNING: Sheet 1/1: SUPPLY Pin V- overwritten with GND
+ERROR: Sheet 1/1: no SUPPLY for POWER Pin IC3 VREF
+WARNING: Sheet 1/1: POWER Pin IC1 VSS1 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 VSS2 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 VDD connected to VCC
+ERROR: OUTPUT and SUPPLY Pins mixed on net VCC
+
+Pins/Pads with different connections:
+
+  Part     Gate     Pin        Net      Pad      Signal
+
+  IC4      P        V+         VCC      4        V+
+  IC4      P        V-         GND      11       V-
+
+ERROR: Inconsistency with implicit power pins (see the above list)!
+
+    3 errors
+    7 warnings

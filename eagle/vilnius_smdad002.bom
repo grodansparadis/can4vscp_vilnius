@@ -1,0 +1,36 @@
+Partlist exported from /home/akhe/hardware/vilnius_Analog2Digital/eagle/smdad002.sch at  5/29/2006 17:33:44 
+
+Part Value             Device            Package          Description                                     
+C1   100uF             CPOL-EUD          PANASONIC_D      POLARIZED CAPACITOR, European symbol            
+C2   100nF             CNP-0805          0805             NON-POLARIZED CAP                               
+C3   100nF             CNP-0805          0805             NON-POLARIZED CAP                               
+C4   1uF               CP-SV-A           SV-A             POLARIZED CAP                                   
+C5   0.1uF             C-EUC0805         C0805            CAPACITOR, European symbol                      
+C6   1uF               CP-SV-A           SV-A             POLARIZED CAP                                   
+D1   S1D               DIODE-SMB         SMB              DIODE                                           
+D2   NUP2105L          DIODE-2CA|ACSOT23 SOT23            Dual DIODE Cathode-Anode|Anode-Cathode          
+D3   BAT54             BAV199            SOT23            DIODE                                           
+D4   BAT54             BAV199            SOT23            DIODE                                           
+D5   BAT54             BAV199            SOT23            DIODE                                           
+D6   BAT54             BAV199            SOT23            DIODE                                           
+IC1  PIC18F2480        PIC18LF252-I/SO   SO28             18F252, 28 pin, 32Kb prog, 1536 data, 256 EEPROM
+IC2  LM2937            LM2937            SOT223                                                           
+IC3  MCP2551SN         MCP2551SN         SO-08            High Speed CAN tranceiver                       
+IC4  MCP604            4AMP_P4+11D       SO14             OP AMP                                          
+J2                     520426-4          520426-4         AMP connector                                   
+JP4                    MA06-1            MA06-1                                                           
+LED1                   LED3MM            LED3MM           LED                                             
+R2   10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R3   1K                R-EU_R0805        R0805            RESISTOR, European symbol                       
+R4   10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R100 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R101 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R102 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R103 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R104 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R105 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R106 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+R107 10K               R-EU_R0805        R0805            RESISTOR, European symbol                       
+S1                     31-XX             B3F-31XX         OMRON SWITCH                                    
+X1                     F09HP             F09HP            SUB-D                                           
+X3   MURATA-CSTX 10MHz MURATA-CSTX       RESONATOR-MURATA                                                 

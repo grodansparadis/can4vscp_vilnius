@@ -1,0 +1,12 @@
+Vilnius
+=======
+
+2014-06-19 - AKHE Fixed dimensiona
+2014-06-18 - AKHE Away to factory
+2013-06-04 - AKHE Added power to missing pin 6 capacitor.
+2011-12-20 - AKHE Added termination resistor. Leave unpopulated.
+2011-11-17 - AKHE Added 1uF capacitor on uP pin 6 forPIC18F66K80 compatibility
+2011-11-15 - AKHE Move L1 so it fits on the board.
+2011-11-10 - AKHE Packages for D1/D2 updatet to SOD123 from SMDB
+2011-11-10 - AKHE CANH should be on pin 4 of RJ-45
+2011-11-02 - AKHE Kontaktlist uppdaterad. Hål var 0.9 och för trånga. Nu 1.2 istället.
