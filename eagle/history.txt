@@ -1,7 +1,9 @@
 Vilnius
 =======
 
-2014-06-19 - AKHE Fixed dimensiona
+2015-11-14 - AKHE VCAP decoupled from VCC
+2015-11-14 - Rev C
+2014-06-19 - AKHE Fixed dimensions
 2014-06-18 - AKHE Away to factory
 2013-06-04 - AKHE Added power to missing pin 6 capacitor.
 2011-12-20 - AKHE Added termination resistor. Leave unpopulated.
