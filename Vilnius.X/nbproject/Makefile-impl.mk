@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Accra.X
+PROJECTNAME=Vilnius.X
 
 # Active Configuration
 DEFAULTCONF=Relocated
