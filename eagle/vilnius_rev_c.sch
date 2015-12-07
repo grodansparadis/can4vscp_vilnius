@@ -17811,6 +17811,8 @@ Digikey ED2737ND</description>
 <part name="R106" library="rcl" deviceset="R-EU_" device="R0805" value="10K"/>
 <part name="R107" library="rcl" deviceset="R-EU_" device="R0805" value="10K"/>
 <part name="GND29" library="SUPPLY1" deviceset="GND" device=""/>
+<part name="P+2" library="SUPPLY1" deviceset="VCC" device=""/>
+<part name="GND18" library="SUPPLY1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -18520,6 +18522,9 @@ Digikey ED2737ND</description>
 <instance part="R106" gate="G$1" x="116.84" y="78.74" rot="R90"/>
 <instance part="R107" gate="G$1" x="116.84" y="63.5" rot="R90"/>
 <instance part="GND29" gate="1" x="116.84" y="55.88"/>
+<instance part="P+2" gate="VCC" x="60.96" y="63.5"/>
+<instance part="GND18" gate="1" x="60.96" y="35.56"/>
+<instance part="IC5" gate="P" x="60.96" y="48.26"/>
 </instances>
 <busses>
 </busses>
@@ -18542,6 +18547,11 @@ Digikey ED2737ND</description>
 <segment>
 <pinref part="D5" gate="G$1" pin="C"/>
 <pinref part="P+13" gate="VCC" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="IC5" gate="P" pin="V+"/>
+<pinref part="P+2" gate="VCC" pin="VCC"/>
+<wire x1="60.96" y1="55.88" x2="60.96" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -18577,6 +18587,11 @@ Digikey ED2737ND</description>
 <segment>
 <pinref part="R107" gate="G$1" pin="1"/>
 <pinref part="GND29" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="IC5" gate="P" pin="V-"/>
+<pinref part="GND18" gate="1" pin="GND"/>
+<wire x1="60.96" y1="40.64" x2="60.96" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IN0-B" class="0">

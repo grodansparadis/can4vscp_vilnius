@@ -27,8 +27,8 @@
  * ******************************************************************************
 */
 
-#ifndef KELVIN_SMART_VERSION_H
-#define KELVIN_SMART_VERSION_H
+#ifndef VILNIUS_VERSION_H
+#define VILNIUS_VERSION_H
 
 // Firmware version
 

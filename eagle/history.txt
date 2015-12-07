@@ -1,6 +1,8 @@
 Vilnius
 =======
 
+2015-12-07 - AKHE Added missing power and ground on IC5.
+2015-12-07 - AKHE Named ports.
 2015-11-14 - AKHE VCAP decoupled from VCC
 2015-11-14 - Rev C
 2014-06-19 - AKHE Fixed dimensions
