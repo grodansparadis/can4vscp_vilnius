@@ -17838,6 +17838,8 @@ Digikey ED2737ND</description>
 <text x="231.14" y="254" size="1.778" layer="91">mount for on board </text>
 <text x="231.14" y="251.46" size="1.778" layer="91">termination</text>
 <text x="231.14" y="259.08" size="1.778" layer="91">R17</text>
+<text x="233.68" y="43.18" size="1.778" layer="91">I/O channel 0 (RC4)</text>
+<text x="233.68" y="50.8" size="1.778" layer="91">I/O channel 1 (RC5)</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -18403,30 +18405,6 @@ Digikey ED2737ND</description>
 <pinref part="J1" gate="G$2" pin="K"/>
 </segment>
 </net>
-<net name="IN4-A" class="0">
-<segment>
-<wire x1="218.44" y1="50.8" x2="223.52" y2="50.8" width="0.1524" layer="91"/>
-<label x="223.52" y="50.8" size="1.778" layer="95"/>
-<pinref part="J1" gate="G$10" pin="K"/>
-</segment>
-<segment>
-<wire x1="142.24" y1="190.5" x2="149.86" y2="190.5" width="0.1524" layer="91"/>
-<label x="149.86" y="190.5" size="1.778" layer="95"/>
-<pinref part="IC1" gate="G$1" pin="RC5/SD0"/>
-</segment>
-</net>
-<net name="IN4-B" class="0">
-<segment>
-<wire x1="218.44" y1="43.18" x2="226.06" y2="43.18" width="0.1524" layer="91"/>
-<label x="223.52" y="43.18" size="1.778" layer="95"/>
-<pinref part="J1" gate="G$11" pin="K"/>
-</segment>
-<segment>
-<wire x1="142.24" y1="193.04" x2="149.86" y2="193.04" width="0.1524" layer="91"/>
-<label x="149.86" y="193.04" size="1.778" layer="95"/>
-<pinref part="IC1" gate="G$1" pin="RC4/SDI/SDA"/>
-</segment>
-</net>
 <net name="CANL" class="0">
 <segment>
 <wire x1="251.46" y1="238.76" x2="259.08" y2="238.76" width="0.1524" layer="91"/>
@@ -18486,10 +18464,38 @@ Digikey ED2737ND</description>
 <pinref part="C8" gate="G$1" pin="2"/>
 </segment>
 </net>
+<net name="IO0" class="0">
+<segment>
+<wire x1="218.44" y1="50.8" x2="223.52" y2="50.8" width="0.1524" layer="91"/>
+<label x="223.52" y="50.8" size="1.778" layer="95"/>
+<pinref part="J1" gate="G$10" pin="K"/>
+</segment>
+<segment>
+<wire x1="142.24" y1="190.5" x2="149.86" y2="190.5" width="0.1524" layer="91"/>
+<label x="149.86" y="190.5" size="1.778" layer="95"/>
+<pinref part="IC1" gate="G$1" pin="RC5/SD0"/>
+</segment>
+</net>
+<net name="IO1" class="0">
+<segment>
+<wire x1="218.44" y1="43.18" x2="226.06" y2="43.18" width="0.1524" layer="91"/>
+<label x="223.52" y="43.18" size="1.778" layer="95"/>
+<pinref part="J1" gate="G$11" pin="K"/>
+</segment>
+<segment>
+<wire x1="142.24" y1="193.04" x2="149.86" y2="193.04" width="0.1524" layer="91"/>
+<label x="149.86" y="193.04" size="1.778" layer="95"/>
+<pinref part="IC1" gate="G$1" pin="RC4/SDI/SDA"/>
+</segment>
+</net>
 </nets>
 </sheet>
 <sheet>
 <plain>
+<text x="139.7" y="132.08" size="1.778" layer="91">Channel 0 (RA3)</text>
+<text x="139.7" y="116.84" size="1.778" layer="91">Channel 1 (RA2)</text>
+<text x="139.7" y="96.52" size="1.778" layer="91">Channel 2 (RA1)</text>
+<text x="139.7" y="73.66" size="1.778" layer="91">Channel 3 (RA0)</text>
 </plain>
 <instances>
 <instance part="FRAME2" gate="G$1" x="0" y="0"/>

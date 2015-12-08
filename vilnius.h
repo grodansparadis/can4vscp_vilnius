@@ -99,29 +99,49 @@
 
 // Defaults
 
-#define DEFAULT_VILNIUS_CONTROL_MODULE      0
+#define DEFAULT_VILNIUS_CONTROL_MODULE                  0
 
-#define DEFAULT_VILNIUS_CONTROL_CHANNEL0    0x80
-#define DEFAULT_VILNIUS_CONTROL_CHANNEL1    0x80
-#define DEFAULT_VILNIUS_CONTROL_CHANNEL2    0x80
-#define DEFAULT_VILNIUS_CONTROL_CHANNEL3    0x80
+#define DEFAULT_VILNIUS_CONTROL_CHANNEL0                0x80
+#define DEFAULT_VILNIUS_CONTROL_CHANNEL1                0x80
+#define DEFAULT_VILNIUS_CONTROL_CHANNEL2                0x80
+#define DEFAULT_VILNIUS_CONTROL_CHANNEL3                0x80
 
-#define DEFAULT_AD0_HYSTERESIS              200
-#define DEFAULT_AD1_HYSTERESIS              200
-#define DEFAULT_AD2_HYSTERESIS              200
-#define DEFAULT_AD3_HYSTERESIS              200
+#define DEFAULT_AD0_HYSTERESIS                          200
+#define DEFAULT_AD1_HYSTERESIS                          200
+#define DEFAULT_AD2_HYSTERESIS                          200
+#define DEFAULT_AD3_HYSTERESIS                          200
 
-#define DEFAULT_AD0_REPORT_INTERVAL         0
-#define DEFAULT_AD1_REPORT_INTERVAL         0
-#define DEFAULT_AD2_REPORT_INTERVAL         0
-#define DEFAULT_AD3_REPORT_INTERVAL         0
+#define DEFAULT_AD0_REPORT_INTERVAL                     0
+#define DEFAULT_AD1_REPORT_INTERVAL                     0
+#define DEFAULT_AD2_REPORT_INTERVAL                     0
+#define DEFAULT_AD3_REPORT_INTERVAL                     0
 
-#define DEFAULT_MEASUREMENT0_REPORT_INTERVAL         0
-#define DEFAULT_MEASUREMENT1_REPORT_INTERVAL         0
-#define DEFAULT_MEASUREMENT2_REPORT_INTERVAL         0
-#define DEFAULT_MEASUREMENT3_REPORT_INTERVAL         0
+#define DEFAULT_MEASUREMENT0_REPORT_INTERVAL            0
+#define DEFAULT_MEASUREMENT1_REPORT_INTERVAL            0
+#define DEFAULT_MEASUREMENT2_REPORT_INTERVAL            0
+#define DEFAULT_MEASUREMENT3_REPORT_INTERVAL            0
 
-#define DEFAULT_IO_CONTROL                  0
+#define DEFAULT_IO_CONTROL                              0
+
+// -----------------------------------------------
+
+// Alarm bits
+#define VSCP_ALARM_LOW                                  0x00000001
+#define VSCP_ALARM_HIGH                                 0x00000010
+
+// Bits in A/D channel configuration register
+#define CONFIG_AD_PERIODIC_EVENT_ENABLE                 0b00000001
+#define CONFIG_AD_LOW_ALARM_ENABLE                      0b00000010
+#define CONFIG_AD_HIGH_ALARM_ENABLE                     0b00000100
+#define CONFIG_AD_USE_A_INPUT                           0b00001000
+
+// Bits in I/O channel configuration register
+#define CONFIG_IO0_DIRECTION                            0b00000001  // 0=output, 1=input
+#define CONFIG_IO1_DIRECTION                            0b00000010  // 0=output, 1=input
+#define CONFIG_IO0_EVENT_ON_CHANGE                      0b00010000
+#define CONFIG_IO1_EVENT_ON_CHANGE                      0b00100000
+#define CONFIG_IO0_EVENT_SELECT                         0b01000000
+#define CONFIG_IO1_EVENT_SELECT                         0b10000000
 
 // -----------------------------------------------
 
@@ -369,6 +389,7 @@ void write_app_register(unsigned char reg, unsigned char val);
 void sendDMatrixInfo(void);
 void SendInformationEvent(unsigned char channel, unsigned char eventClass, unsigned char eventTypeId);
 void SendAlarmEvent( uint8_t channel  );
+void SendDataEvent( uint8_t eventType, uint8_t sensoridx, uint16_t val );
 
 // Handle DM
 void doDM(void);

@@ -85,3 +85,7 @@
 /Vilnius.X/dist/Relocated/production/*.rlf
 /Vilnius.X/dist/Relocated/production/*.sdb
 /Vilnius.X/dist/Relocated/production/*.sym
+*.b#7
+*.s#4
+*.s#5
+*.s#6

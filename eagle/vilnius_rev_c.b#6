@@ -82,7 +82,7 @@
 <plain>
 <text x="7.1564" y="39.8154" size="1.778" layer="25" font="fixed">Vilnius A/D</text>
 <text x="25.848" y="12.734" size="1.778" layer="25" font="fixed" rot="R90">grodansparadis.com</text>
-<text x="19.474" y="38.883" size="1.016" layer="25" font="fixed">rev B</text>
+<text x="19.474" y="38.883" size="1.016" layer="25" font="fixed">rev C</text>
 <text x="50.23" y="15.99" size="1.016" layer="25" font="fixed">PWR</text>
 <text x="68.52" y="33.72" size="1.016" layer="25" font="fixed" rot="R90">INIT</text>
 <wire x1="0" y1="0" x2="0" y2="42" width="0" layer="20"/>

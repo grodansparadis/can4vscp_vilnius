@@ -226,35 +226,35 @@
             <name lang="en">A/D channel 0 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable event on change.\n
-            Bit 1 - Enable periodic events.\n
-            Bit 2 - Enable stream events.\n
-            Bit 3 - Enable low alarm.\n
-            Bit 4 - Enable high alarm.\n
+            Bit 0 - Enable periodic events.\n
+            Bit 1 - Enable low alarm.\n
+            Bit 2 - Enable high alarm.\n
+            Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
+            Bit 4 - Reserved.\n
             Bit 5 - Reserved.\n
             Bit 6 - Reserved.\n
-            Bit 7 - Enable counter.
+            Bit 7 - Reserved.
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Event on change</name>
-                <description lang="en">Enable event on change.</description> 
+                <name lang="en">Periodic events</name>
+                <description lang="en">Enable periodic events.</description> 
             </bit>
             <bit pos="1" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events. </description> 
-            </bit>
-            <bit pos="2" default="false" >
-                <name lang="en">Stream events</name>
-                <description lang="en">Enable stream events. </description> 
-            </bit>
-            <bit pos="3" default="false" >
                 <name lang="en">Low Alarm</name>
                 <description lang="en">Enable low alarm.</description> 
             </bit>
-            <bit pos="4" default="false" >
+            <bit pos="2" default="false" >
                 <name lang="en">High Alarm</name>
                 <description lang="en">Enable high alarm.</description> 
+            </bit>
+            <bit pos="3" default="false" >
+                <name lang="en">A input is used</name>
+                <description lang="en">The A input is used so the real voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before they are used in reporting and calculations.</description> 
+            </bit>
+            <bit pos="4" default="false" >
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="5" default="false" >
                 <name lang="en">Reserved</name>
@@ -265,8 +265,8 @@
                 <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="7" default="true" >
-                <name lang="en">Enable channel</name>
-                <description lang="en">Enable the A/D converter for channel 0.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
         </reg>
         
@@ -274,35 +274,35 @@
             <name lang="en">A/D channel 1 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable event on change.\n
-            Bit 1 - Enable periodic events.\n
-            Bit 2 - Enable stream events.\n
-            Bit 3 - Enable low alarm.\n
-            Bit 4 - Enable high alarm.\n
+            Bit 0 - Enable periodic events.\n
+            Bit 1 - Enable low alarm.\n
+            Bit 2 - Enable high alarm.\n
+            Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
+            Bit 4 - Reserved.\n
             Bit 5 - Reserved.\n
             Bit 6 - Reserved.\n
-            Bit 7 - Enable counter.
+            Bit 7 - Reserved.
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Event on change</name>
-                <description lang="en">Enable event on change.</description> 
+                <name lang="en">Periodic events</name>
+                <description lang="en">Enable periodic events.</description> 
             </bit>
             <bit pos="1" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events. </description> 
-            </bit>
-            <bit pos="2" default="false" >
-                <name lang="en">Stream events</name>
-                <description lang="en">Enable stream events. </description> 
-            </bit>
-            <bit pos="3" default="false" >
                 <name lang="en">Low Alarm</name>
                 <description lang="en">Enable low alarm.</description> 
             </bit>
-            <bit pos="4" default="false" >
+            <bit pos="2" default="false" >
                 <name lang="en">High Alarm</name>
                 <description lang="en">Enable high alarm.</description> 
+            </bit>
+            <bit pos="3" default="false" >
+                <name lang="en">A input is used</name>
+                <description lang="en">The A input is used so the real voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before they are used in reporting and calculations.</description> 
+            </bit>
+            <bit pos="4" default="false" >
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="5" default="false" >
                 <name lang="en">Reserved</name>
@@ -313,8 +313,8 @@
                 <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="7" default="true" >
-                <name lang="en">Enable channel</name>
-                <description lang="en">Enable the A/D converter for channel 1.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
         </reg>
         
@@ -322,35 +322,35 @@
             <name lang="en">A/D channel 2 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable event on change.\n
-            Bit 1 - Enable periodic events.\n
-            Bit 2 - Enable stream events.\n
-            Bit 3 - Enable low alarm.\n
-            Bit 4 - Enable high alarm.\n
+            Bit 0 - Enable periodic events.\n
+            Bit 1 - Enable low alarm.\n
+            Bit 2 - Enable high alarm.\n
+            Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
+            Bit 4 - Reserved.\n
             Bit 5 - Reserved.\n
             Bit 6 - Reserved.\n
-            Bit 7 - Enable counter.
+            Bit 7 - Reserved.
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Event on change</name>
-                <description lang="en">Enable event on change.</description> 
+                <name lang="en">Periodic events</name>
+                <description lang="en">Enable periodic events.</description> 
             </bit>
             <bit pos="1" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events. </description> 
-            </bit>
-            <bit pos="2" default="false" >
-                <name lang="en">Stream events</name>
-                <description lang="en">Enable stream events. </description> 
-            </bit>
-            <bit pos="3" default="false" >
                 <name lang="en">Low Alarm</name>
                 <description lang="en">Enable low alarm.</description> 
             </bit>
-            <bit pos="4" default="false" >
+            <bit pos="2" default="false" >
                 <name lang="en">High Alarm</name>
                 <description lang="en">Enable high alarm.</description> 
+            </bit>
+            <bit pos="3" default="false" >
+                <name lang="en">A input is used</name>
+                <description lang="en">The A input is used so the real voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before they are used in reporting and calculations.</description> 
+            </bit>
+            <bit pos="4" default="false" >
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="5" default="false" >
                 <name lang="en">Reserved</name>
@@ -361,8 +361,8 @@
                 <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="7" default="true" >
-                <name lang="en">Enable channel</name>
-                <description lang="en">Enable the A/D converter for channel 2.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
         </reg>
         
@@ -370,35 +370,35 @@
             <name lang="en">A/D channel 3 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable event on change.\n
-            Bit 1 - Enable periodic events.\n
-            Bit 2 - Enable stream events.\n
-            Bit 3 - Enable low alarm.\n
-            Bit 4 - Enable high alarm.\n
+            Bit 0 - Enable periodic events.\n
+            Bit 1 - Enable low alarm.\n
+            Bit 2 - Enable high alarm.\n
+            Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
+            Bit 4 - Reserved.\n
             Bit 5 - Reserved.\n
             Bit 6 - Reserved.\n
-            Bit 7 - Enable counter.
+            Bit 7 - Reserved.
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Event on change</name>
-                <description lang="en">Enable event on change.</description> 
+                <name lang="en">Periodic events</name>
+                <description lang="en">Enable periodic events.</description> 
             </bit>
             <bit pos="1" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events. </description> 
-            </bit>
-            <bit pos="2" default="false" >
-                <name lang="en">Stream events</name>
-                <description lang="en">Enable stream events. </description> 
-            </bit>
-            <bit pos="3" default="false" >
                 <name lang="en">Low Alarm</name>
                 <description lang="en">Enable low alarm.</description> 
             </bit>
-            <bit pos="4" default="false" >
+            <bit pos="2" default="false" >
                 <name lang="en">High Alarm</name>
                 <description lang="en">Enable high alarm.</description> 
+            </bit>
+            <bit pos="3" default="false" >
+                <name lang="en">A input is used</name>
+                <description lang="en">The A input is used so the real voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before they are used in reporting and calculations.</description> 
+            </bit>
+            <bit pos="4" default="false" >
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="5" default="false" >
                 <name lang="en">Reserved</name>
@@ -409,8 +409,8 @@
                 <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="7" default="true" >
-                <name lang="en">Enable channel</name>
-                <description lang="en">Enable the A/D converter for channel 3.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
         </reg>
         
@@ -794,8 +794,8 @@
                 Bit 1 - Direction for I/O channel 0 (RC5). 0=output. 1=input.\n
                 Bit 2 - Reserved.\n
                 Bit 3 - Reserved.\n
-                Bit 4 - Reserved.\n
-                Bit 5 - Reserved.\n
+                Bit 4 - Enable event on change I/O channel 0.\n
+                Bit 5 - Enable event on change I/O channel 1.\n
                 Bit 6 - Reserved.\n
                 Bit 7 - Reserved.
             </description>
@@ -817,20 +817,20 @@
                 <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="4" default="false" >
-                <name lang="en">Reserved</name>
-                <description lang="en">Reserved.</description> 
+                <name lang="en">Enable I/O channel 0 change event</name>
+                <description lang="en">Enable event on change I/O channel 0.</description> 
             </bit>
             <bit pos="5" default="false" >
-                <name lang="en">Reserved</name>
-                <description lang="en">Reserved.</description> 
+                <name lang="en">Enable I/O channel 1 change event</name>
+                <description lang="en">Enable event on change I/O channel 1.</description> 
             </bit>
             <bit pos="6" default="false" >
-                <name lang="en">Reserved</name>
-                <description lang="en">Reserved.</description> 
+                <name lang="en">I/O channel 0 select change event</name>
+                <description lang="en">Select if ON/OFF (set to zero) or TURNON/TURNOFF (set to one) events should be sent as change events on channel 0.</description> 
             </bit>
             <bit pos="7" default="true" >
-                <name lang="en">Reserved</name>
-                <description lang="en">Reserved.</description> 
+                <name lang="en">I/O channel 1 select change event</name>
+                <description lang="en">Select if ON/OFF (set to zero) or TURNON/TURNOFF (set to one) events should be sent as change events on channel 1.</description> 
             </bit>
             <access>rw</access>
         </reg>

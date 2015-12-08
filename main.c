@@ -109,8 +109,12 @@ BOOL bLowAlarm[ 4 ];
 BOOL bHighAlarm[ 4 ];
 
 // Report interval counters
-uint16_t valueReports[ 4 ];
+volatile uint16_t valueReports[ 4 ];
 uint8_t measurementReports[ 4 ];
+
+// IO states
+BOOL IOsavebit0;
+BOOL IOsavebit1;
 
 //__EEPROM_DATA(0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88);
 
@@ -267,6 +271,10 @@ void interrupt low_priority  interrupt_at_low_vector( void )
         vscp_configtimer++;
         measurement_clock_sec++;
         sendTimer++;
+        valueReports[ 0 ]++;
+        valueReports[ 1 ]++;
+        valueReports[ 2 ]++;
+        valueReports[ 3 ]++;
 
         // Check for init. button
         if ( INIT_BUTTON ) {
@@ -312,7 +320,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
 
             case SELECT_ADC0:
                 // Read conversion
-                analog_value[ 0 ] = ADRES;
+                analog_value[ 3 ] = ADRES;
 
                 // Start new conversion
                 ADCON0 = SELECT_ADC1 + 1;
@@ -320,7 +328,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
 
             case SELECT_ADC1:
                 // Read conversion
-                analog_value[ 1 ] = ADRES;
+                analog_value[ 2 ] = ADRES;
 
                 // Start new conversion
                 ADCON0 = SELECT_ADC2 + 1;
@@ -328,7 +336,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
 
             case SELECT_ADC2:
                 // Read conversion
-                analog_value[ 2 ] = ADRES;
+                analog_value[ 1 ] = ADRES;
 
                 // Start new conversion
                 ADCON0 = SELECT_ADC3 + 1;
@@ -336,8 +344,8 @@ void interrupt low_priority  interrupt_at_low_vector( void )
 
             case SELECT_ADC3:
                 // Read conversion
-                analog_value[ 3 ] = ADRES;
-
+                analog_value[ 0 ] = ADRES;
+                
                 // Start new conversion
                 ADCON0 = SELECT_ADC0 + 1;
                 break;
@@ -355,7 +363,6 @@ void interrupt low_priority  interrupt_at_low_vector( void )
 
     } // ADC
     
-
     return;
 }
 
@@ -590,6 +597,9 @@ void init_app_ram( void )
     
     memset( valueReports, 0, sizeof( valueReports ) );
     memset( measurementReports, 0, sizeof( measurementReports ) );
+    
+    IOsavebit0 = FALSE;
+    IOsavebit1 = FALSE;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -693,6 +703,255 @@ void doWork(void)
 
 void doApplicationOneSecondWork(void)
 {
+    for ( int i=0; i<4; i++ ) {
+        
+        //*********************************************************************
+        // Check if this is the lowest reading ever
+        //*********************************************************************
+        
+        if ( analog_value[ i ] < 
+                construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_LSB + 2*i ] ) ) ) {
+            // Store new lowest value
+            eeprom_write( reg2eeprom_pg0[REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_MSB + 2*i ], 
+                            ( analog_value[ i ] >> 8 ) );
+            eeprom_write( reg2eeprom_pg0[REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_LSB + 2*i ], 
+                            ( analog_value[ i ] & 0xff ) );
+        }
+
+        //*********************************************************************
+        // Check if this is the highest reading ever
+        //*********************************************************************
+        
+        if (analog_value[ i ] > 
+                construct_unsigned16( eeprom_read( reg2eeprom_pg0[REG0_VILNIUS_ABSOLUT_HIGH_CHANNEL0_MSB + 2*i ] ), 
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ABSOLUT_HIGH_CHANNEL0_LSB + 2*i ] ) ) ) {
+            // Store new lowest value
+            eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_ABSOLUT_HIGH_CHANNEL0_MSB + 2*i ], 
+                            ( analog_value[ i ] >> 8 ) );
+            eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_ABSOLUT_HIGH_CHANNEL0_LSB + 2*i ], 
+                         ( analog_value[ i ] & 0xff ) );
+        }
+        
+        //*********************************************************************
+        // Periodic events
+        //*********************************************************************
+        
+        // Must be enabled
+        if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_CHANNEL0 + i ] ) & 
+                                                CONFIG_AD_PERIODIC_EVENT_ENABLE ) {
+            // Time for a report?
+            if ( valueReports[ i ] > 
+                construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_LSB + 2*i ] ) ) )            
+                valueReports[ i ] = 0;  // Reset
+                SendDataEvent( VSCP_TYPE_DATA_AD, i, analog_value[ i ] );
+        }
+        
+        //*********************************************************************
+        // Low alarm
+        //*********************************************************************
+        
+        // Must be enabled
+        if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_CHANNEL0 + i ] ) & 
+                                                CONFIG_AD_LOW_ALARM_ENABLE ) {
+            
+            // No alarm
+            if ( !bLowAlarm[ i ] ) {
+             
+                if ( analog_value[ i ] <
+                        construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB + 2*i ] ) ) ) {
+                    bLowAlarm[ i ] = TRUE;                  // Mark alarm condition
+                    vscp_alarmstatus |= VSCP_ALARM_LOW;     // Set VSCP alarm bit
+                    SendAlarmEvent( i );
+                }
+                
+            }
+            // Already alarm
+            else {
+                
+                // Check if we should reset alarm
+                if ( analog_value[ i ] >
+                        ( construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB + 2*i ] ) ) +
+                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH0_MSB + i ] ) ) ) {
+                    
+                    bLowAlarm[ i ] = FALSE;   // Reset alarm condition
+                    
+                }
+                
+            }
+            
+        }
+        
+        //*********************************************************************
+        // High alarm
+        //*********************************************************************
+        
+        // Must be enabled
+        if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_CHANNEL0 + i ] ) & 
+                                                CONFIG_AD_HIGH_ALARM_ENABLE ) {
+            
+            // No alarm
+            if ( !bHighAlarm[ i ] ) {
+             
+                if ( analog_value[ i ] <
+                        construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_LSB + 2*i ] ) ) ) {
+                    bHighAlarm[ i ] = TRUE;                  // Mark alarm condition
+                    vscp_alarmstatus |= VSCP_ALARM_HIGH;     // Set VSCP alarm bit
+                    SendAlarmEvent( i );
+                }
+                
+            }
+            // Already alarm
+            else {
+                
+                // Check if we should reset alarm
+                if ( analog_value[ i ] >
+                        ( construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_LSB + 2*i ] ) ) +
+                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH0_MSB + i ] ) ) ) {
+                    
+                    bHighAlarm[ i ] = FALSE;   // Reset alarm condition
+                    
+                }
+                
+            }            
+            
+        }
+        
+    }
+    
+    //*********************************************************************
+    // Check if I/O-0 should be checked for changes
+    //*********************************************************************
+    
+    // Must be enabled
+    if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) & 
+                                            CONFIG_IO0_EVENT_ON_CHANGE ) {
+        
+        // Must be input (Bit == 1)
+        if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) & 
+                                            CONFIG_IO0_DIRECTION ) {
+            
+            // Was set last check
+            if ( IOsavebit0 ) {
+                
+                // If not set now send events 
+                if ( !IO0_INPUT ) {
+                    
+                    if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) &  
+                                            CONFIG_IO0_EVENT_SELECT ) {
+                        
+                        SendInformationEvent( 0, 
+                                                VSCP_CLASS1_CONTROL,
+                                                VSCP_TYPE_CONTROL_TURNON );
+                    }   
+                    else {
+                        SendInformationEvent( 0, 
+                                                VSCP_CLASS1_INFORMATION,
+                                                VSCP_TYPE_INFORMATION_ON );
+                    }
+                    
+                }
+                
+            }
+            // was cleared last check
+            else {
+                
+                // If set now send events 
+                if ( IO0_INPUT ) {
+                    
+                    if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) &  
+                                            CONFIG_IO0_EVENT_SELECT ) {
+                        
+                        SendInformationEvent( 0, 
+                                                VSCP_CLASS1_CONTROL,
+                                                VSCP_TYPE_CONTROL_TURNOFF );
+                    }   
+                    else {
+                        SendInformationEvent( 0, 
+                                                VSCP_CLASS1_INFORMATION,
+                                                VSCP_TYPE_INFORMATION_OFF );
+                    }
+                    
+                }
+                
+            }
+            
+            // Save state
+            IOsavebit0 = IO0_INPUT;
+            
+        }
+        
+    }
+        
+    //*********************************************************************
+    // Check if I/O-1 should be checked for changes
+    //*********************************************************************
+        
+    // Must be enabled
+    if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) & 
+                                            CONFIG_IO1_EVENT_ON_CHANGE ) {
+        
+        // Must be input (Bit == 1)
+        if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) & 
+                                            CONFIG_IO1_DIRECTION ) {
+            
+            // Was set last check
+            if ( IOsavebit1 ) {
+                
+                // If not set now send events 
+                if ( !IO1_INPUT ) {
+                    
+                    if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) &  
+                                            CONFIG_IO1_EVENT_SELECT ) {
+                        
+                        SendInformationEvent( 1, 
+                                                VSCP_CLASS1_CONTROL,
+                                                VSCP_TYPE_CONTROL_TURNON );
+                    }   
+                    else {
+                        SendInformationEvent( 1, 
+                                                VSCP_CLASS1_INFORMATION,
+                                                VSCP_TYPE_INFORMATION_ON );
+                    }
+                    
+                }
+                
+            }
+            // was cleared last check
+            else {
+                
+                // If set now send events 
+                if ( IO1_INPUT ) {
+                    
+                    if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ] ) &  
+                                            CONFIG_IO1_EVENT_SELECT ) {
+                        
+                        SendInformationEvent( 1, 
+                                                VSCP_CLASS1_CONTROL,
+                                                VSCP_TYPE_CONTROL_TURNOFF );
+                    }   
+                    else {
+                        SendInformationEvent( 1, 
+                                                VSCP_CLASS1_INFORMATION,
+                                                VSCP_TYPE_INFORMATION_OFF );
+                    }
+                    
+                }
+                
+            }
+            
+            // Save state
+            IOsavebit1 = IO1_INPUT;
+            
+        }
+        
+    }
+        
     
 }
 
@@ -728,7 +987,6 @@ unsigned char getSubMinorVersion()
 //
 
 #ifdef ENABLE_WRITE_2PROTECTED_LOCATIONS
-
 void vscp_setGUID(uint8_t idx, uint8_t data ) {
     if ( idx>15 ) return;
     eeprom_write(VSCP_EEPROM_REG_GUID + idx, data);
@@ -740,7 +998,6 @@ void vscp_setGUID(uint8_t idx, uint8_t data ) {
 //
 
 #ifdef ENABLE_WRITE_2PROTECTED_LOCATIONS
-
 void vscp_setManufacturerId( uint8_t idx, uint8_t data ) {
     if ( idx>7 ) return;
     eeprom_write(VSCP_EEPROM_REG_MANUFACTUR_ID0 + idx, data);
@@ -989,6 +1246,28 @@ void SendInformationEvent( unsigned char channel,
                     vscp_nickname,
                     VSCP_PRIORITY_MEDIUM,
                     3,
+                    data );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// SendDataEvent
+//
+
+void SendDataEvent( uint8_t eventType, uint8_t sensoridx, uint16_t val )
+{
+    uint8_t data[5];
+
+    data[ 0 ] = 0b01100000 + sensoridx; // Coding integer, default unit, channel
+    data[ 1 ] = 0; // Send as 32-bit integer to take care of sign - always positive.
+    data[ 2 ] = 0;        
+    data[ 3 ] = ( val >> 8 ) & 0xff;
+    data[ 4 ] = ( val & 0xff );
+    sendVSCPFrame( VSCP_CLASS1_DATA,
+                    eventType,
+                    vscp_nickname,
+                    VSCP_PRIORITY_MEDIUM,
+                    5,
                     data );
 }
 
