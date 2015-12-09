@@ -226,7 +226,7 @@
             <name lang="en">A/D channel 0 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable periodic events.\n
+            Bit 0 - Reserved.\n
             Bit 1 - Enable low alarm.\n
             Bit 2 - Enable high alarm.\n
             Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
@@ -237,8 +237,8 @@
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="1" default="false" >
                 <name lang="en">Low Alarm</name>
@@ -274,7 +274,7 @@
             <name lang="en">A/D channel 1 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable periodic events.\n
+            Bit 0 - Reserved.\n
             Bit 1 - Enable low alarm.\n
             Bit 2 - Enable high alarm.\n
             Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
@@ -285,8 +285,8 @@
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="1" default="false" >
                 <name lang="en">Low Alarm</name>
@@ -322,7 +322,7 @@
             <name lang="en">A/D channel 2 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable periodic events.\n
+            Bit 0 - Reserved.\n
             Bit 1 - Enable low alarm.\n
             Bit 2 - Enable high alarm.\n
             Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
@@ -333,8 +333,8 @@
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="1" default="false" >
                 <name lang="en">Low Alarm</name>
@@ -370,7 +370,7 @@
             <name lang="en">A/D channel 3 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
-            Bit 0 - Enable periodic events.\n
+            Bit 0 - Reserved.\n
             Bit 1 - Enable low alarm.\n
             Bit 2 - Enable high alarm.\n
             Bit 3 - The A input is used so voltage is double to what is read on the A/D input. Readings will therefore be multiplied by two before it is used. .\n
@@ -381,8 +381,8 @@
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
-                <name lang="en">Periodic events</name>
-                <description lang="en">Enable periodic events.</description> 
+                <name lang="en">Reserved</name>
+                <description lang="en">Reserved.</description> 
             </bit>
             <bit pos="1" default="false" >
                 <name lang="en">Low Alarm</name>
@@ -480,53 +480,53 @@
             <access>r</access>
         </reg>
         
-        <!-- A/D sample time -->
+        <!-- A/D report interval -->
         
         <reg page="0" offset="27" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 0 (MSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 0. MSB byte.</description>
+            <name lang="en">A/D report interval channel 0 (MSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 0. MSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="28" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 0 (LSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 0. LSB byte.</description>
+            <name lang="en">A/D report interval channel 0 (LSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 0. LSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="29" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 0 (MSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 0. MSB byte.</description>
+            <name lang="en">A/D report interval channel 0 (MSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 0. MSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="30" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 0 (LSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 0. LSB byte.</description>
+            <name lang="en">A/D report interval channel 0 (LSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 0. LSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="31" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 0 (MSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 0. MSB byte.</description>
+            <name lang="en">A/D report interval channel 0 (MSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 0. MSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="32" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 1 (LSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 1. LSB byte.</description>
+            <name lang="en">A/D report interval channel 1 (LSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 1. LSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="33" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 2 (MSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 2. MSB byte.</description>
+            <name lang="en">A/D report interval channel 2 (MSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 2. MSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="34" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D sample time channel 3 (LSB)</name>
-            <description lang="en">32-bit sample time in milliseconds for channel 3. LSB byte.</description>
+            <name lang="en">A/D report interval channel 3 (LSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 3. LSB byte.</description>
             <access>rw</access>
         </reg>
         
@@ -658,27 +658,51 @@
         
         <!-- Measurement report interval -->
         
+        <reg page="0" offset="55" default="0" bgcolor="0xF9EAE3">
+            <name lang="en">Measurement report interval sensor 0 (MSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 0. Set to zero to turn of reporting. (MSB)</description>
+            <access>rw</access>
+        </reg>
+        
+        <reg page="0" offset="56" default="0" bgcolor="0xF9EAE3">
+            <name lang="en">Measurement report interval sensor 0 (LSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 0. Set to zero to turn of reporting. (LSB)</description>
+            <access>rw</access>
+        </reg>
+        
+        <reg page="0" offset="57" default="0" bgcolor="0xF9EAE3">
+            <name lang="en">Measurement report interval sensor 1 (MSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 1. Set to zero to turn of reporting. (MSB)</description>
+            <access>rw</access>
+        </reg>
+        
+        <reg page="0" offset="58" default="0" bgcolor="0xF9EAE3">
+            <name lang="en">Measurement report interval sensor 1 (LSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 1. Set to zero to turn of reporting. (LSB)</description>
+            <access>rw</access>
+        </reg>
+        
         <reg page="0" offset="59" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">Measurement report interval sensor 0.</name>
-            <description lang="en">Report interval in seconds for measurements events for channel 0. Set to zero to turn of reporting.</description>
+            <name lang="en">Measurement report interval sensor 2 (MSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 2. Set to zero to turn of reporting. (MSB)</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="60" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">Measurement report interval sensor 1.</name>
-            <description lang="en">Report interval in seconds for measurements events for channel 1. Set to zero to turn of reporting.</description>
+            <name lang="en">Measurement report interval sensor 2 (LSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 2. Set to zero to turn of reporting. (LSB)</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="61" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">Measurement report interval sensor 2.</name>
-            <description lang="en">Report interval in seconds for measurements events for channel 2. Set to zero to turn of reporting.</description>
+            <name lang="en">Measurement report interval sensor 3 (MSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 3. Set to zero to turn of reporting. (MSB)</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="62" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">Measurement report interval sensor 3.</name>
-            <description lang="en">Report interval in seconds for measurements events for channel 3. Set to zero to turn of reporting.</description>
+            <name lang="en">Measurement report interval sensor 3 (LSB).</name>
+            <description lang="en">16-bit report interval in milliseconds for measurements events for channel 3. Set to zero to turn of reporting. (LSB)</description>
             <access>rw</access>
         </reg>
         
@@ -818,11 +842,11 @@
             </bit>
             <bit pos="4" default="false" >
                 <name lang="en">Enable I/O channel 0 change event</name>
-                <description lang="en">Enable event on change I/O channel 0.</description> 
+                <description lang="en">Enable event on change for I/O channel 0.</description> 
             </bit>
             <bit pos="5" default="false" >
                 <name lang="en">Enable I/O channel 1 change event</name>
-                <description lang="en">Enable event on change I/O channel 1.</description> 
+                <description lang="en">Enable event on change for I/O channel 1.</description> 
             </bit>
             <bit pos="6" default="false" >
                 <name lang="en">I/O channel 0 select change event</name>

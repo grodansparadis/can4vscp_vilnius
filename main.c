@@ -101,7 +101,6 @@ uint8_t minutes;            // Counter for minutes
 uint8_t hours;              // Counter for hours
 
 uint16_t analog_value[4];   // A/D values
-uint8_t analog_idx;         // Current measurement
 
 // Set to true when an alarm condition is met. Will be reseted
 // when alarm condition is not met.
@@ -147,14 +146,14 @@ const uint8_t reg2eeprom_pg0[] = {
     /* REG0_VILNIUS_AD_VALUE_CHANNEL2_LSB   */          0xff,
     /* REG0_VILNIUS_AD_VALUE_CHANNEL3_MSB   */          0xff,
     /* REG0_VILNIUS_AD_VALUE_CHANNEL3_LSB   */          0xff,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_MSB*/          VSCP_EEPROM_END + 19,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_LSB*/          VSCP_EEPROM_END + 20,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL1_MSB*/          VSCP_EEPROM_END + 21,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL1_LSB*/          VSCP_EEPROM_END + 22,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL2_MSB*/          VSCP_EEPROM_END + 23,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL2_LSB*/          VSCP_EEPROM_END + 24,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL3_MSB*/          VSCP_EEPROM_END + 25,
-    /* REG0_VILNIUS_SAMPLE_TIME_CHANNEL3_LSB*/          VSCP_EEPROM_END + 26,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL0_MSB*/   VSCP_EEPROM_END + 19,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL0_LSB*/   VSCP_EEPROM_END + 20,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL1_MSB*/   VSCP_EEPROM_END + 21,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL1_LSB*/   VSCP_EEPROM_END + 22,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL2_MSB*/   VSCP_EEPROM_END + 23,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL2_LSB*/   VSCP_EEPROM_END + 24,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL3_MSB*/   VSCP_EEPROM_END + 25,
+    /* REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL3_LSB*/   VSCP_EEPROM_END + 26,
     /* REG0_VILNIUS_ALARM_LOW_CHANNEL0_MSB  */          VSCP_EEPROM_END + 27,
     /* REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB  */          VSCP_EEPROM_END + 28,
     /* REG0_VILNIUS_ALARM_LOW_CHANNEL1_MSB  */          VSCP_EEPROM_END + 29,
@@ -175,14 +174,14 @@ const uint8_t reg2eeprom_pg0[] = {
     /* REG0_VILNIUS_HYSTERESIS_CH1_MSB      */          VSCP_EEPROM_END + 44,
     /* REG0_VILNIUS_HYSTERESIS_CH2_MSB      */          VSCP_EEPROM_END + 45,
     /* REG0_VILNIUS_HYSTERESIS_CH3_MSB      */          VSCP_EEPROM_END + 46,
-    /* REG0_VILNIUS_COUNTER_REPORT_INTERVAL_CH0 */      VSCP_EEPROM_END + 47,
-    /* REG0_VILNIUS_COUNTER_REPORT_INTERVAL_CH1 */      VSCP_EEPROM_END + 48,
-    /* REG0_VILNIUS_COUNTER_REPORT_INTERVAL_CH2 */      VSCP_EEPROM_END + 49,
-    /* REG0_VILNIUS_COUNTER_REPORT_INTERVAL_CH3 */      VSCP_EEPROM_END + 50,
-    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH0 */    VSCP_EEPROM_END + 51,
-    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH1 */    VSCP_EEPROM_END + 52,
-    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH2 */    VSCP_EEPROM_END + 53,
-    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH3 */    VSCP_EEPROM_END + 54,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH0_MSB */  VSCP_EEPROM_END + 47,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH0_LSB */  VSCP_EEPROM_END + 48,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH1_MSB */  VSCP_EEPROM_END + 49,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH1_LSB */  VSCP_EEPROM_END + 50,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH2_MSB */  VSCP_EEPROM_END + 51,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH2_LSB */  VSCP_EEPROM_END + 52,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH3_MSB */  VSCP_EEPROM_END + 53,
+    /* REG0_VILNIUS_MESURMENT_REPORT_INTERVAL_CH3_MSB */  VSCP_EEPROM_END + 54,
     /* REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_MSB    */      VSCP_EEPROM_END + 55,
     /* REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_LSB    */      VSCP_EEPROM_END + 56,
     /* REG0_VILNIUS_ABSOLUT_LOW_CHANNEL1_MSB    */      VSCP_EEPROM_END + 57,
@@ -275,6 +274,10 @@ void interrupt low_priority  interrupt_at_low_vector( void )
         valueReports[ 1 ]++;
         valueReports[ 2 ]++;
         valueReports[ 3 ]++;
+        measurementReports[ 0 ]++;
+        measurementReports[ 1 ]++;
+        measurementReports[ 2 ]++;
+        measurementReports[ 3 ]++;
 
         // Check for init. button
         if ( INIT_BUTTON ) {
@@ -584,12 +587,11 @@ void init()
 void init_app_ram( void )
 {    
     measurement_clock_sec = 0;      // start a new measurement cycle
-
+    
     seconds = 0;
     minutes = 0;
     hours = 0;
     
-    analog_idx = 0;
     memset( analog_value, 0, sizeof( analog_value ) );
     
     memset( bLowAlarm, 0, sizeof( bLowAlarm ) );
@@ -637,7 +639,8 @@ void init_app_eeprom(void)
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_CHANNEL3 ], DEFAULT_VILNIUS_CONTROL_CHANNEL0 );
             
     for ( int i=0; i<8; i++ ) {
-        eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_MSB + i ], 0 );
+        eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL0_MSB + i ], 0 );
+        eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_MEASUREMENT_REPORT_INTERVAL_CH0_MSB + i ], 0 );
         eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_MSB + i ], 0 );
         eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_MSB + i ], 0 );
         eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_ABSOLUT_HIGH_CHANNEL0_MSB + i ], 0 );
@@ -651,26 +654,43 @@ void init_app_eeprom(void)
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH1_MSB ], DEFAULT_AD1_HYSTERESIS );
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH2_MSB ], DEFAULT_AD2_HYSTERESIS );
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH3_MSB ], DEFAULT_AD3_HYSTERESIS );
-    
-    eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_REPORT_INTERVAL_CH0 ], DEFAULT_AD0_REPORT_INTERVAL );
-    eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_REPORT_INTERVAL_CH1 ], DEFAULT_AD1_REPORT_INTERVAL );
-    eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_REPORT_INTERVAL_CH2 ], DEFAULT_AD2_REPORT_INTERVAL );
-    eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_REPORT_INTERVAL_CH3 ], DEFAULT_AD3_REPORT_INTERVAL );
-    
-    eeprom_write( reg2eeprom_pg0[ DEFAULT_MEASUREMENT0_REPORT_INTERVAL ], DEFAULT_AD0_REPORT_INTERVAL );
-    eeprom_write( reg2eeprom_pg0[ DEFAULT_MEASUREMENT1_REPORT_INTERVAL ], DEFAULT_AD1_REPORT_INTERVAL );
-    eeprom_write( reg2eeprom_pg0[ DEFAULT_MEASUREMENT2_REPORT_INTERVAL ], DEFAULT_AD2_REPORT_INTERVAL );
-    eeprom_write( reg2eeprom_pg0[ DEFAULT_MEASUREMENT3_REPORT_INTERVAL ], DEFAULT_AD3_REPORT_INTERVAL );
-    
+        
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_IO ], DEFAULT_IO_CONTROL );
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_IO_STATE ], 0 );
     
     // Page 1
-    for ( int i=REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0;
+    
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 ], DEFAULT_LINEARIZATION_EVENT_SETTING );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH1 ], DEFAULT_LINEARIZATION_EVENT_SETTING );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH2 ], DEFAULT_LINEARIZATION_EVENT_SETTING );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH3 ], DEFAULT_LINEARIZATION_EVENT_SETTING );
+    
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH0 ], DEFAULT_LINEARIZATION_EVENT_CLASS );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH1 ], DEFAULT_LINEARIZATION_EVENT_CLASS );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH2 ], DEFAULT_LINEARIZATION_EVENT_CLASS );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH3 ], DEFAULT_LINEARIZATION_EVENT_CLASS );
+    
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH0 ], DEFAULT_LINEARIZATION_EVENT_TYPE );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH1 ], DEFAULT_LINEARIZATION_EVENT_TYPE );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH2 ], DEFAULT_LINEARIZATION_EVENT_TYPE );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH3 ], DEFAULT_LINEARIZATION_EVENT_TYPE );
+    
+    // We set k = 1 and m = 0
+    for ( int i=REG1_VILNIUS_CH0_LINEARIZATION_K_0;
             i<=REG1_VILNIUS_CH3_LINEARIZATION_M_LSB;
             i++ ) {
         eeprom_write( reg2eeprom_pg1[ i ], 0 );
     }
+    
+    // 32-t floating point little endian 1 = 0x00, 0x00, 0x80, 0x3f
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_2 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_3 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH1_LINEARIZATION_K_2 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH1_LINEARIZATION_K_3 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH2_LINEARIZATION_K_2 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH2_LINEARIZATION_K_3 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH3_LINEARIZATION_K_2 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH3_LINEARIZATION_K_3 ], 0x3f );
     
     // * * * Decision Matrix * * *
     
@@ -694,15 +714,8 @@ void init_app_eeprom(void)
 
 void doWork(void)
 {
+    uint16_t report_interval;
     
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// doApplicationOneSecondWork
-//
-
-void doApplicationOneSecondWork(void)
-{
     for ( int i=0; i<4; i++ ) {
         
         //*********************************************************************
@@ -737,15 +750,16 @@ void doApplicationOneSecondWork(void)
         // Periodic events
         //*********************************************************************
         
-        // Must be enabled
-        if ( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_CHANNEL0 + i ] ) & 
-                                                CONFIG_AD_PERIODIC_EVENT_ENABLE ) {
-            // Time for a report?
-            if ( valueReports[ i ] > 
-                construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_MSB + 2*i ] ),
-                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_LSB + 2*i ] ) ) )            
+        report_interval = 
+                construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL0_LSB + 2*i ] ) );
+        
+        // Must be enabled  )
+        if ( report_interval && ( valueReports[ i ] > report_interval ) ) {
+            
                 valueReports[ i ] = 0;  // Reset
                 SendDataEvent( VSCP_TYPE_DATA_AD, i, analog_value[ i ] );
+                
         }
         
         //*********************************************************************
@@ -820,6 +834,68 @@ void doApplicationOneSecondWork(void)
                 
             }            
             
+        }
+        
+        
+        //*********************************************************************
+        // Periodic measurement events
+        //*********************************************************************
+        
+        report_interval = 
+                construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_MEASUREMENT_REPORT_INTERVAL_CH0_MSB + 2*i ] ),
+                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_MEASUREMENT_REPORT_INTERVAL_CH0_LSB + 2*i ] ) );
+        
+        // Must be enabled >0 
+        if ( report_interval && ( measurementReports[ i ] > report_interval ) ) {
+        
+            uint8_t data[8];
+            uint8_t floatBuf[4];
+            double val;
+            
+            measurementReports[ i ] = 0;
+            
+            floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_3 + 4*i ] );
+            floatBuf[ 1 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_2 + 4*i ] );
+            floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_1 + 4*i ] );
+            floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_0 + 4*i ] );
+            double k = *((double *)floatBuf);
+            
+            floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_3 + 4*i ] );
+            floatBuf[ 1 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_2 + 4*i ] );
+            floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_1 + 4*i ] );
+            floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_0 + 4*i ] );
+            double m = *((double *)floatBuf);
+            
+            // Floating point value 0v10100000
+            // unit from control settings (bits 3,4)
+            // Channel as index
+            data[ 0 ] = 
+                    ( 0b10100000 | ( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*i ] ) & 
+                                                        MEASUREMENT_CTRL_UNIT_MASK ) ) + i; 
+                
+            // Do calculation                
+            val =  k*analog_value[ i ] + m;
+            
+            // Set data
+            uint8_t *p = (uint8_t *)&val;
+            data[ 4 ] = p[ 3 ];
+            data[ 3 ] = p[ 2 ];
+            data[ 2 ] = p[ 1 ];
+            data[ 1 ] = p[ 0 ];
+            
+  
+            uint16_t vscpclass = (( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*i ] ) & 
+                                                    MEASUREMENT_CTRL_CLASS_BIT_8 ) ? 512 : 0 ) +
+                                                    eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH0 + 3*i ] );
+            uint8_t vscptype = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH0 + 3*i ] );
+                    
+            sendVSCPFrame( vscpclass,
+                                vscptype,
+                                vscp_nickname,
+                                VSCP_PRIORITY_NORMAL,
+                                5,
+                                data );
+        
         }
         
     }
@@ -952,6 +1028,15 @@ void doApplicationOneSecondWork(void)
         
     }
         
+        
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// doApplicationOneSecondWork
+//
+
+void doApplicationOneSecondWork(void)
+{
     
 }
 
@@ -1109,7 +1194,7 @@ uint8_t vscp_readAppReg(uint8_t reg)
             rv = analog_value[ 3 ] & 0xff;
         }
         // 
-        else if ( ( reg >= REG0_VILNIUS_SAMPLE_TIME_CHANNEL0_MSB ) && 
+        else if ( ( reg >= REG0_VILNIUS_AD_REPORT_INTERVAL_CHANNEL0_MSB ) && 
                     ( reg <= REG0_VILNIUS_CONTROL_IO ) ) {
             rv = eeprom_read( reg2eeprom_pg0[ reg ] );
         }
