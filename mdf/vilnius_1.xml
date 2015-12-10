@@ -1,11 +1,11 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<!-- Ake Hedman, Grodans Paradis AB -->
+<!-- Ake Hedman, Grodans Paradis AB, akhe@grodansparads.com -->
 <vscp>
 <module>
     <name>Vilnius A/D module</name>
     <model>B</model>
-    <version>1</version>
-    <changed>2015-12-08</changed>
+    <version>5</version>
+    <changed>2015-12-10</changed>
     <description lang="en">
         With this VSCP module it is possible to measure voltage 
         on four channels and to read/write two digital I/O
@@ -13,7 +13,7 @@
     <infourl>http://www.grodansparadis.com/vilnius/vilnius.html</infourl>
     <buffersize>8</buffersize>
     <manufacturer>
-        <name>Grodans Paradis AB</name>
+        <name>Paradise of the Frog AB</name>
         <address>
             <street>Brattbergavägen 17</street>
             <city>Los</city>
@@ -46,7 +46,7 @@
     <picture path="http://www.grodansparadis.com/accra/images/accra14.png" 
         format="jpg" >
         <description lang="en" >
-        Picture of the Accra counter module.
+        Picture of the Vilnius A/D module.
         </description>
     </picture>
     
@@ -222,7 +222,7 @@
             </bit>
         </reg>
         
-        <reg page="0" offset="15" default="0x80" bgcolor="0xD8F2F5">
+        <reg page="0" offset="15" default="0" bgcolor="0xD8F2F5">
             <name lang="en">A/D channel 0 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
@@ -270,7 +270,7 @@
             </bit>
         </reg>
         
-        <reg page="0" offset="16" default="0x80" bgcolor="0xD8F2F5">
+        <reg page="0" offset="16" default="0" bgcolor="0xD8F2F5">
             <name lang="en">A/D channel 1 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
@@ -318,7 +318,7 @@
             </bit>
         </reg>
         
-        <reg page="0" offset="17" default="0x80" bgcolor="0xD8F2F5">
+        <reg page="0" offset="17" default="0" bgcolor="0xD8F2F5">
             <name lang="en">A/D channel 2 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
@@ -366,7 +366,7 @@
             </bit>
         </reg>
         
-        <reg page="0" offset="18" default="0x80" bgcolor="0xD8F2F5">
+        <reg page="0" offset="18" default="0" bgcolor="0xD8F2F5">
             <name lang="en">A/D channel 3 control register</name>
             <description lang="en">
             Control register for A/D channel 0\n\n
@@ -416,7 +416,7 @@
         
         <!-- A/D values -->
         
-        <reg page="0" offset="19" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="19" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 0 (MSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 0. MSB byte.
@@ -424,7 +424,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="20" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="20" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 0 (LSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 0. LSB byte.
@@ -432,7 +432,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="21" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="21" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 1 (MSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 1. MSB byte.
@@ -440,7 +440,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="22" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="22" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 1 (LSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 1. LSB byte.
@@ -448,7 +448,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="23" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="23" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 2 (MSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 2. MSB byte.
@@ -456,7 +456,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="24" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="24" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 2 (LSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 2. LSB byte.
@@ -464,7 +464,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="25" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="25" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 3 (MSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 3. MSB byte.
@@ -472,7 +472,7 @@
             <access>r</access>
         </reg>
         
-        <reg page="0" offset="26" default="0" bgcolor="0xebd69d">
+        <reg page="0" offset="26" bgcolor="0xebd69d">
             <name lang="en">A/D value channel 3 (LSB)</name>
             <description lang="en">
             16 bit analog to digital value for channel 3. LSB byte.
@@ -809,7 +809,7 @@
         
         <!-- I/O Control Register -->
         
-        <reg page="0" offset="79" default="0xffff" bgcolor="0xF9EAE3">
+        <reg page="0" offset="79" default="0" bgcolor="0xF9EAE3">
             <name lang="en">I/O Channel Control Register</name>
             <description lang="en">
                 Control register for the two I/O channels.\n
@@ -861,7 +861,7 @@
         
         <!-- I/O Status Register -->
         
-        <reg page="0" offset="80" default="0xffff" bgcolor="0xF9EAE3">
+        <reg page="0" offset="80" default="0" bgcolor="0xF9EAE3">
             <name lang="en">I/O Channel Status Register</name>
             <description lang="en">Status register for the two I/O channels.</description>
             <access>rw</access>
@@ -930,7 +930,7 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="2" default="0" bgcolor="0xFAF1FA">
+        <reg page="1" offset="2" default="16" bgcolor="0xFAF1FA">
             <name lang="en">VSCP event information type channel 0.</name>
             <description lang="en">VSCP event information for linearization channel 0, VSCP Type.</description>
             <access>rw</access>
@@ -992,7 +992,7 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="5" default="0" bgcolor="0xFAF1FA">
+        <reg page="1" offset="5" default="16" bgcolor="0xFAF1FA">
             <name lang="en">VSCP event information type channel 1.</name>
             <description lang="en">VSCP event information for linearization channel 1, VSCP Type.</description>
             <access>rw</access>
@@ -1054,7 +1054,7 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="8" default="0" bgcolor="0xFAF1FA">
+        <reg page="1" offset="8" default="16" bgcolor="0xFAF1FA">
             <name lang="en">VSCP event information type channel 2.</name>
             <description lang="en">VSCP event information for linearization channel 2, VSCP Type.</description>
             <access>rw</access>
@@ -1116,7 +1116,7 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="11" default="0" bgcolor="0xFAF1FA">
+        <reg page="1" offset="11" default="16" bgcolor="0xFAF1FA">
             <name lang="en">VSCP event information type channel 3.</name>
             <description lang="en">VSCP event information for linearization channel 3, VSCP Type.</description>
             <access>rw</access>
@@ -1124,13 +1124,13 @@
    
         <!-- linearization constants -->
    
-        <reg page="1" offset="12" default="0" bgcolor="0xDBE7EC">
+        <reg page="1" offset="12" default="0x3f" bgcolor="0xDBE7EC">
             <name lang="en">k constant for channel 0 (MSB)</name>
             <description lang="en">k constant for channel 0 linear transformation (MSB).</description>
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="13" default="0" bgcolor="0xDBE7EC">
+        <reg page="1" offset="13" default="0x80" bgcolor="0xDBE7EC">
             <name lang="en">k constant for channel 0</name>
             <description lang="en">k constant for channel 0 linear transformation.</description>
             <access>rw</access>
@@ -1148,13 +1148,13 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="16" default="0" bgcolor="0xebd69d">
+        <reg page="1" offset="16" default="0x3f" bgcolor="0xebd69d">
             <name lang="en">k constant for channel 1 (MSB)</name>
             <description lang="en">k constant for channel 0 linear transformation (MSB).</description>
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="17" default="0" bgcolor="0xebd69d">
+        <reg page="1" offset="17" default="0x80" bgcolor="0xebd69d">
             <name lang="en">k constant for channel 1</name>
             <description lang="en">k constant for channel 1 linear transformation.</description>
             <access>rw</access>
@@ -1172,13 +1172,13 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="20" default="0" bgcolor="0xDBE7EC">
+        <reg page="1" offset="20" default="0x3f" bgcolor="0xDBE7EC">
             <name lang="en">k constant for channel 2 (MSB)</name>
             <description lang="en">k constant for channel 2 linear transformation (MSB).</description>
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="21" default="0" bgcolor="0xDBE7EC">
+        <reg page="1" offset="21" default="0x80" bgcolor="0xDBE7EC">
             <name lang="en">k constant for channel 2</name>
             <description lang="en">k constant for channel 2 linear transformation.</description>
             <access>rw</access>
@@ -1196,13 +1196,13 @@
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="24" default="0" bgcolor="0xebd69d">
+        <reg page="1" offset="24" default="0x3f" bgcolor="0xebd69d">
             <name lang="en">k constant for channel 3 (MSB)</name>
             <description lang="en">k constant for channel 3 linear transformation (MSB).</description>
             <access>rw</access>
         </reg>
         
-        <reg page="1" offset="25" default="0" bgcolor="0xebd69d">
+        <reg page="1" offset="25" default="0x80" bgcolor="0xebd69d">
             <name lang="en">k constant for channel 3</name>
             <description lang="en">k constant for channel 3 linear transformation.</description>
             <access>rw</access>
@@ -1316,7 +1316,103 @@
             <access>rw</access>
         </reg>
         
+        <!-- Measurement values -->
         
+        <reg page="1" offset="44" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 0 (MSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 0 (MSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="45" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 0</name>
+            <description lang="en">32-bit floating point measurement value for channel 0.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="46" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 0</name>
+            <description lang="en">32-bit floating point measurement value for channel 0.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="47" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 0 (LSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 0 (LSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="48" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 1 (MSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 1( MSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="49" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 1</name>
+            <description lang="en">32-bit floating point measurement value for channel 1.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="50" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 1</name>
+            <description lang="en">32-bit floating point measurement value for channel 1.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="51" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 1 (LSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 1 (LSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="52" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 2 (MSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 2(MSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="53" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 2</name>
+            <description lang="en">32-bit floating point measurement value for channel 2.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="54" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 2</name>
+            <description lang="en">32-bit floating point measurement value for channel 2.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="55" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 2</name>
+            <description lang="en">32-bit floating point measurement value for channel 2 (LSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="56" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 3 (MSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 3 (MSB).</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="57" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 3</name>
+            <description lang="en">32-bit floating point measurement value for channel 3.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="58" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 3</name>
+            <description lang="en">32-bit floating point measurement value for channel 3.</description>
+            <access>r</access>
+        </reg>
+        
+        <reg page="1" offset="59" default="0" bgcolor="0xDBE7EC">
+            <name lang="en">Measurement channel 3 (LSB)</name>
+            <description lang="en">32-bit floating point measurement value for channel 3 (LSB).</description>
+            <access>r</access>
+        </reg>
         
         <!--
         ///////////////////////////////////////////////////////////////////////
@@ -1335,324 +1431,352 @@
     
     <abstractions>
 
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "18" 
+        <!-- A/D value -->
+    
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "19" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">counter0</name>
-        <description lang="en">A 32-bit counter value for channel 0.\n</description>
+        <name lang="en">ch0_value</name>
+        <description lang="en">A/D value for channel 0.\n</description>
         <access>r</access>
         </abstraction>
         
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "22" 
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "21" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">counter1</name>
-        <description lang="en">A 32-bit counter value for channel 1.\n</description>
-        <access>r</access>
-        </abstraction>
-
-        <abstraction type="uint32_t" 
-                            page = "0" offset = "26" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">counter2</name>
-        <description lang="en">A 32-bit counter value for channel 2.\n</description>
+        <name lang="en">ch1_value</name>
+        <description lang="en">A/D value for channel 1.\n</description>
         <access>r</access>
         </abstraction>
         
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "30" 
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "23" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">counter3</name>
-        <description lang="en">A 32-bit counter value for channel 3.\n</description>
+        <name lang="en">ch2_value</name>
+        <description lang="en">A/D value for channel 2.\n</description>
         <access>r</access>
         </abstraction>
         
-        <abstraction type="uint32_t"   
-                            page = "1" offset = "0" 
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "25" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">frequency0</name>
-        <description lang="en">A 32-bit frequency for channel 0.\n</description>
+        <name lang="en">ch3_value</name>
+        <description lang="en">A/D value for channel 3.\n</description>
         <access>r</access>
         </abstraction>
         
-        <abstraction type="uint32_t"   
-                            page = "1" offset = "4" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">frequency1</name>
-        <description lang="en">A 32-bit frequency for channel 1.\n</description>
+        <!-- Measurement value -->
+        
+        <abstraction type="float"  
+                            page = "1" offset = "44" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch0_measurement_value</name>
+        <description lang="en">Measurement value for channel 0.\n</description>
         <access>r</access>
         </abstraction>
         
-        <abstraction type="uint32_t"   
-                            page = "1" offset = "8" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">frequency2</name>
-        <description lang="en">A 32-bit frequency for channel 2.\n</description>
+        <abstraction type="float"  
+                            page = "1" offset = "48" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch1_measurement_value</name>
+        <description lang="en">Measurement value for channel 1.\n</description>
         <access>r</access>
         </abstraction>
         
-        <abstraction type="uint32_t"   
+        <abstraction type="float"  
+                            page = "1" offset = "52" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch2_measurement_value</name>
+        <description lang="en">Measurement value for channel 2.\n</description>
+        <access>r</access>
+        </abstraction>
+        
+        <abstraction type="float"  
+                            page = "1" offset = "56" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch3_measurement_value</name>
+        <description lang="en">Measurement value for channel 3.\n</description>
+        <access>r</access>
+        </abstraction>
+        
+        <!-- A/D report interval -->
+    
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "27" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch0_report_interval</name>
+        <description lang="en">Report interval in milliseconds for channel 0. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "29" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch1_report_interval</name>
+        <description lang="en">Report interval in milliseconds for channel 1. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "31" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch2_report_interval</name>
+        <description lang="en">Report interval in milliseconds for channel 2. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "33" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch3_report_interval</name>
+        <description lang="en">Report interval in milliseconds for channel 3. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        
+        <!-- Measurement report interval -->
+    
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "55" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch0_report_interval</name>
+        <description lang="en">Report interval in milliseconds for measurements A/D channel 0. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "57" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch1_measurement_report_interval</name>
+        <description lang="en">Report interval in milliseconds for measurements A/D channel 1. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "59" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch2_measurement_report_interval</name>
+        <description lang="en">Report interval in milliseconds for measurements A/D channel 2. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "61" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch3_measurement_report_interval</name>
+        <description lang="en">Report interval in milliseconds for measurements A/D channel 3. Set to zero to disable.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        
+        <!-- Low alarm setpoint -->
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "35" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch0_low_alarm</name>
+        <description lang="en">Low alarm set point for channel 0.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "37" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch1_low_alarm</name>
+        <description lang="en">Low alarm set point for channel 1.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "39" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch2_low_alarm</name>
+        <description lang="en">Low alarm set point for channel 2.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "41" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch3_low_alarm</name>
+        <description lang="en">Low alarm set point for channel 3.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <!-- High alarm setpoint -->
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "43" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch0_high_alarm</name>
+        <description lang="en">High alarm set point for channel 0.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "45" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch1_high_alarm</name>
+        <description lang="en">High alarm set point for channel 1.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "47" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch2_high_alarm</name>
+        <description lang="en">High alarm set point for channel 2.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "49" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch3_high_alarm</name>
+        <description lang="en">High alarm set point for channel 3.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        
+        
+        <!-- Absolute low value -->
+        
+        
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "63" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch0_low</name>
+        <description lang="en">Absolute low value for channel 0.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "65" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch1_low</name>
+        <description lang="en">Absolute low value for channel 1.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "67" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch2_low</name>
+        <description lang="en">Absolute low value for channel 2.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "69" 
+                            bgcolor="0xE0E0FF" >
+        <name lang="en">ch3_low</name>
+        <description lang="en">Absolute low value for channel 3.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        
+        <!-- Absolute high value -->
+        
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "71" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch0_high</name>
+        <description lang="en">Absolute high value for channel 0.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "73" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch1_high</name>
+        <description lang="en">Absolute high value for channel 1.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "75" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch2_high</name>
+        <description lang="en">Absolute high value for channel 2.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="uint16_t"  
+                            page = "0" offset = "77" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch3_high</name>
+        <description lang="en">Absolute high value for channel 3.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        
+        <!-- Linearization k values -->    
+        
+        
+        <abstraction type="float" default="1"  
                             page = "1" offset = "12" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">frequency3</name>
-        <description lang="en">A 32-bit frequency for channel 3.\n</description>
-        <access>r</access>
-        </abstraction>
-        
-        <abstraction type="float" default="0"  
-                            page = "2" offset = "0" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt0_k</name>
-        <description lang="en">A 32-bit floating point k-constant for linearisation of channel 0.\n</description>
+        <name lang="en">ch0_k</name>
+        <description lang="en">Linearization k-constant for channel 0.\n</description>
         <access>rw</access>
         </abstraction>
         
         <abstraction type="float" default="0"  
-                            page = "2" offset = "16" 
+                            page = "1" offset = "28" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">cnt0_m</name>
-        <description lang="en">A 32-bit floating point m-constant for linearisation of channel 0.\n</description>
+        <name lang="en">ch0_m</name>
+        <description lang="en">Linearization m-constant for channel 0.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="float" default="1"  
+                            page = "1" offset = "16" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch1_k</name>
+        <description lang="en">Linearization k-constant for channel 1.\n</description>
         <access>rw</access>
         </abstraction>
         
         <abstraction type="float" default="0"  
-                            page = "2" offset = "4" 
+                            page = "1" offset = "32" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch1_m</name>
+        <description lang="en">Linearization m-constant for channel 1.\n</description>
+        <access>rw</access>
+        </abstraction>
+        
+        <abstraction type="float" default="1"  
+                            page = "1" offset = "20" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">cnt1_k</name>
-        <description lang="en">A 32-bit floating point k-constant for linearisation of channel 1.\n</description>
+        <name lang="en">ch2_k</name>
+        <description lang="en">Linearization k-constant for channel 2.\n</description>
         <access>rw</access>
         </abstraction>
         
         <abstraction type="float" default="0"  
-                            page = "2" offset = "20" 
+                            page = "1" offset = "36" 
                             bgcolor="0xE0E0FF" >
-        <name lang="en">cnt1_m</name>
-        <description lang="en">A 32-bit floating point m-constant for linearisation of channel 1.\n</description>
+        <name lang="en">ch2_m</name>
+        <description lang="en">Linearization m-constant for channel 2.\n</description>
         <access>rw</access>
         </abstraction>
         
-        <abstraction type="float" default="0"  
-                            page = "2" offset = "8" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt2_k</name>
-        <description lang="en">A 32-bit floating point k-constant for linearisation of channel 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="float" default="0"  
-                            page = "2" offset = "24" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt2_m</name>
-        <description lang="en">A 32-bit floating point m-constant for linearisation of channel 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="float" default="0"  
-                            page = "2" offset = "12" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt3_k</name>
-        <description lang="en">A 32-bit floating point k-constant for linearisation of channel 3.\n</description>
+        <abstraction type="float" default="1"  
+                            page = "1" offset = "24" 
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch3_k</name>
+        <description lang="en">Linearization k-constant for channel 3.\n</description>
         <access>rw</access>
         </abstraction>
 
         <abstraction type="float" default="0"  
-                            page = "2" offset = "28" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt3_m</name>
-        <description lang="en">A 32-bit floating point m-constant for linearisation of channel 3.\n</description>
-        <access>rw</access>     
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "34" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt0_alarm_level</name>
-        <description lang="en">A 32-bit counter alarm level for channel 0.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "38" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt1_alarm_level</name>
-        <description lang="en">A 32-bit counter alarm level for channel 1.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "42" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt2_alarm_level</name>
-        <description lang="en">A 32-bit counter alarm level for channel 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "46" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt3_alarm_level</name>
-        <description lang="en">A 32-bit counter alarm level for channel 3.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "50" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt0_reload</name>
-        <description lang="en">A 32-bit counter reload value for channel 0.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "54" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt1_reload</name>
-        <description lang="en">A 32-bit counter reload value for channel 1.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "58" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt2_reload</name>
-        <description lang="en">A 32-bit counter reload value for channel 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "0" offset = "62" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt3_reload</name>
-        <description lang="en">A 32-bit counter reload value for channel 3.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  default="200" 
-                            page = "0" offset = "66" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt0_hysteresis</name>
-        <description lang="en">A 16-bit counter hysteresis value for channel 0.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  default="200" 
-                            page = "0" offset = "68" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt1_hysteresis</name>
-        <description lang="en">A 16-bit counter hysteresis value for channel 1.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  default="200" 
-                            page = "0" offset = "70" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt2_hysteresis</name>
-        <description lang="en">A 16-bit counter hysteresis value for channel 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t" default="200" 
-                            page = "0" offset = "72" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">cnt3_hysteresis</name>
-        <description lang="en">A 16-bit counter hysteresis value for channel 3.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "16" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq0_alarm_low</name>
-        <description lang="en">A 32-bit low alarm level for frequency 0.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "20" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq1_alarm_low</name>
-        <description lang="en">A 32-bit low alarm level for frequency 1.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "24" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq2_alarm_low</name>
-        <description lang="en">A 32-bit low alarm level for frequency 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "28" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq3_alarm_low</name>
-        <description lang="en">A 32-bit low alarm level for frequency 3.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "32" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq0_alarm_high</name>
-        <description lang="en">A 32-bit high alarm level for frequency 0.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "36" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq1_alarm_high</name>
-        <description lang="en">A 32-bit high alarm level for frequency 1.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
                             page = "1" offset = "40" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq2_alarm_high</name>
-        <description lang="en">A 32-bit high alarm level for frequency 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint32_t"  
-                            page = "1" offset = "44" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq3_alarm_high</name>
-        <description lang="en">A 32-bit high alarm level for frequency 3.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  
-                            page = "1" offset = "48" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq0_hysteresis</name>
-        <description lang="en">A 16-bit hysteresis value for frequency 0.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  
-                            page = "1" offset = "50" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq1_hysteresis</name>
-        <description lang="en">A 16-bit hysteresis value for frequency 1.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  
-                            page = "1" offset = "52" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq2_hysteresis</name>
-        <description lang="en">A 16-bit hysteresis value for frequency 2.\n</description>
-        <access>rw</access>
-        </abstraction>
-        
-        <abstraction type="uint16_t"  
-                            page = "1" offset = "54" 
-                            bgcolor="0xE0E0FF" >
-        <name lang="en">freq3_hysteresis</name>
-        <description lang="en">A 16-bit hysteresis value for frequency 3.\n</description>
-        <access>rw</access>
+                            bgcolor="0xD8F2F5" >
+        <name lang="en">ch3_m</name>
+        <description lang="en">Linearization m-constant for channel 3.\n</description>
+        <access>rw</access>     
         </abstraction>
      
    </abstractions>
@@ -1662,58 +1786,58 @@
 
     <alarm>
     <bit pos="7">
-        <name lang="en">Alarm frequency 3</name>
+        <name lang="en">Reserved</name>
         <description lang="en">
-        Frequency alarm channel 3. The frequency is higher/lower then a limit value..
+        Reserved.
         </description>
     </bit>
     
     <bit pos="6">
-        <name lang="en">Alarm frequency 2</name>
+        <name lang="en">Reserved</name>
         <description lang="en">
-        Frequency alarm channel 2. The frequency is higher/lower then a limit value.
+        Reserved.
         </description>
     </bit>
     
     <bit pos="5">
-        <name lang="en">Alarm frequency 1</name>
+        <name lang="en"></name>
         <description lang="en">
-        Frequency alarm channel 1. The frequency is higher/lower then a limit value.
+        Reserved.
         </description>
     </bit>
     
     <bit pos="4">
-        <name lang="en">Alarm frequency 0</name>
+        <name lang="en">Reserved</name>
         <description lang="en">
-        Frequency alarm channel 0. The frequency is higher/lower then a limit value.
+        Reserved.
         </description>
     </bit>
     
     <bit pos="3">
-        <name lang="en">Alarm counter 3</name>
+        <name lang="en">Reserved</name>
         <description lang="en">
-        Counter alarm channel 3. The counter has passed a limit value.
+        Reserved.
         </description>
     </bit>
     
     <bit pos="2">
-        <name lang="en">Alarm counter 2</name>
+        <name lang="en">Reserved</name>
         <description lang="en">
-        Counter alarm channel 2. The counter has passed a limit value.
+        Reserved.
         </description>
     </bit>
     
     <bit pos="1">
-        <name lang="en">Alarm counter 1</name>
+        <name lang="en">Low alarm</name>
         <description lang="en">
-        Counter alarm channel 1. The counter has passed a limit value.
+        Low alarm. The value of one of the A/D channels has gone above the high alarm level.
         </description>
     </bit>
     
     <bit pos="0">
-        <name lang="en">Alarm counter 0</name>
+        <name lang="en">Low alarm</name>
         <description lang="en">
-        Counter alarm channel 0. The counter has passed a limit value.
+        Low alarm. The value of one of the A/D channels has gone under the low alarm level.
         </description>
     </bit>                          
     </alarm>

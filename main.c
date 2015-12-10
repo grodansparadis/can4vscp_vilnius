@@ -109,7 +109,7 @@ BOOL bHighAlarm[ 4 ];
 
 // Report interval counters
 volatile uint16_t valueReports[ 4 ];
-uint8_t measurementReports[ 4 ];
+uint16_t measurementReports[ 4 ];
 
 // IO states
 BOOL IOsavebit0;
@@ -683,14 +683,14 @@ void init_app_eeprom(void)
     }
     
     // 32-t floating point little endian 1 = 0x00, 0x00, 0x80, 0x3f
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_2 ], 0x80 );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_3 ], 0x3f );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH1_LINEARIZATION_K_2 ], 0x80 );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH1_LINEARIZATION_K_3 ], 0x3f );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH2_LINEARIZATION_K_2 ], 0x80 );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH2_LINEARIZATION_K_3 ], 0x3f );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH3_LINEARIZATION_K_2 ], 0x80 );
-    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH3_LINEARIZATION_K_3 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_1 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_0 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH1_LINEARIZATION_K_1 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH1_LINEARIZATION_K_0 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH2_LINEARIZATION_K_1 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH2_LINEARIZATION_K_0 ], 0x3f );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH3_LINEARIZATION_K_1 ], 0x80 );
+    eeprom_write( reg2eeprom_pg1[ REG1_VILNIUS_CH3_LINEARIZATION_K_0 ], 0x3f );
     
     // * * * Decision Matrix * * *
     
@@ -775,7 +775,7 @@ void doWork(void)
              
                 if ( analog_value[ i ] <
                         construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_MSB + 2*i ] ),
-                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB + 2*i ] ) ) ) {
+                                              eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB + 2*i ] ) ) ) {
                     bLowAlarm[ i ] = TRUE;                  // Mark alarm condition
                     vscp_alarmstatus |= VSCP_ALARM_LOW;     // Set VSCP alarm bit
                     SendAlarmEvent( i );
@@ -788,7 +788,7 @@ void doWork(void)
                 // Check if we should reset alarm
                 if ( analog_value[ i ] >
                         ( construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_MSB + 2*i ] ),
-                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB + 2*i ] ) ) +
+                                                eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_LOW_CHANNEL0_LSB + 2*i ] ) ) +
                         eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH0_MSB + i ] ) ) ) {
                     
                     bLowAlarm[ i ] = FALSE;   // Reset alarm condition
@@ -810,12 +810,12 @@ void doWork(void)
             // No alarm
             if ( !bHighAlarm[ i ] ) {
              
-                if ( analog_value[ i ] <
+                if ( analog_value[ i ] >
                         construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_MSB + 2*i ] ),
-                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_LSB + 2*i ] ) ) ) {
+                                              eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_LSB + 2*i ] ) ) ) {
                     bHighAlarm[ i ] = TRUE;                  // Mark alarm condition
                     vscp_alarmstatus |= VSCP_ALARM_HIGH;     // Set VSCP alarm bit
-                    SendAlarmEvent( i );
+                    SendAlarmEvent( i + 0x80 );              // Bit 7 marks high alarm
                 }
                 
             }
@@ -823,9 +823,9 @@ void doWork(void)
             else {
                 
                 // Check if we should reset alarm
-                if ( analog_value[ i ] >
+                if ( analog_value[ i ] <
                         ( construct_unsigned16( eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_MSB + 2*i ] ),
-                                                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_LSB + 2*i ] ) ) +
+                                                eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ALARM_HIGH_CHANNEL0_LSB + 2*i ] ) ) -
                         eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_HYSTERESIS_CH0_MSB + i ] ) ) ) {
                     
                     bHighAlarm[ i ] = FALSE;   // Reset alarm condition
@@ -849,22 +849,11 @@ void doWork(void)
         if ( report_interval && ( measurementReports[ i ] > report_interval ) ) {
         
             uint8_t data[8];
-            uint8_t floatBuf[4];
             double val;
             
             measurementReports[ i ] = 0;
             
-            floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_3 + 4*i ] );
-            floatBuf[ 1 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_2 + 4*i ] );
-            floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_1 + 4*i ] );
-            floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_0 + 4*i ] );
-            double k = *((double *)floatBuf);
-            
-            floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_3 + 4*i ] );
-            floatBuf[ 1 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_2 + 4*i ] );
-            floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_1 + 4*i ] );
-            floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_0 + 4*i ] );
-            double m = *((double *)floatBuf);
+            val = calculateMeasurement( i );
             
             // Floating point value 0v10100000
             // unit from control settings (bits 3,4)
@@ -872,9 +861,6 @@ void doWork(void)
             data[ 0 ] = 
                     ( 0b10100000 | ( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*i ] ) & 
                                                         MEASUREMENT_CTRL_UNIT_MASK ) ) + i; 
-                
-            // Do calculation                
-            val =  k*analog_value[ i ] + m;
             
             // Set data
             uint8_t *p = (uint8_t *)&val;
@@ -883,7 +869,6 @@ void doWork(void)
             data[ 2 ] = p[ 1 ];
             data[ 1 ] = p[ 0 ];
             
-  
             uint16_t vscpclass = (( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*i ] ) & 
                                                     MEASUREMENT_CTRL_CLASS_BIT_8 ) ? 512 : 0 ) +
                                                     eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH0 + 3*i ] );
@@ -1039,6 +1024,35 @@ void doApplicationOneSecondWork(void)
 {
     
 }
+
+double calculateMeasurement( uint8_t sendoridx )
+{
+    uint8_t data[8];
+    uint8_t floatBuf[4];
+            
+    floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_3 + 4*sendoridx ] );
+    floatBuf[ 1 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_2 + 4*sendoridx ] );
+    floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_1 + 4*sendoridx ] );
+    floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_0 + 4*sendoridx ] );
+    double k = *((double *)floatBuf);
+            
+    floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_3 + 4*sendoridx ] );
+    floatBuf[ 1 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_2 + 4*sendoridx ] );
+    floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_1 + 4*sendoridx ] );
+    floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_0 + 4*sendoridx ] );
+    double m = *((double *)floatBuf);
+            
+    // Floating point value 0v10100000
+    // unit from control settings (bits 3,4)
+    // Channel as index
+    data[ 0 ] = 
+                ( 0b10100000 | ( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*sendoridx ] ) & 
+                                                        MEASUREMENT_CTRL_UNIT_MASK ) ) + sendoridx; 
+                
+    // Do calculation                
+    return  (k*analog_value[ sendoridx ]*MODULE_VOLTAGE)/MODULE_AD_MAX_VALUE + m;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Get Major version number for this hardware module
@@ -1212,6 +1226,50 @@ uint8_t vscp_readAppReg(uint8_t reg)
         if ( ( reg >= REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 ) && 
                     ( reg <= REG1_VILNIUS_CH3_LINEARIZATION_M_LSB ) ) {
             rv = eeprom_read( reg2eeprom_pg1[ reg ] );
+        }
+        else if ( ( reg >= REG1_VILNIUS_CH0_MEASUREMENT_VALUE_MSB ) &&
+            ( reg <= REG1_VILNIUS_CH0_MEASUREMENT_VALUE_LSB ) ) {
+            
+            double val;           
+            val = calculateMeasurement( 0 );
+            
+            // Set data
+            uint8_t *p = (uint8_t *)&val;
+            rv = p[ reg - REG1_VILNIUS_CH0_MEASUREMENT_VALUE_MSB ];
+            
+        }
+        else if ( ( reg >= REG1_VILNIUS_CH1_MEASUREMENT_VALUE_MSB ) &&
+            ( reg <= REG1_VILNIUS_CH1_MEASUREMENT_VALUE_LSB ) ) {
+            
+            double val;            
+            val = calculateMeasurement( 1 );
+            
+            // Set data
+            uint8_t *p = (uint8_t *)&val;
+            rv = p[ reg - REG1_VILNIUS_CH1_MEASUREMENT_VALUE_MSB ];
+            
+        }
+        else if ( ( reg >= REG1_VILNIUS_CH2_MEASUREMENT_VALUE_MSB ) &&
+            ( reg <= REG1_VILNIUS_CH2_MEASUREMENT_VALUE_LSB ) ) {
+            
+            double val;            
+            val = calculateMeasurement( 2 );
+            
+            // Set data
+            uint8_t *p = (uint8_t *)&val;
+            rv = p[ reg - REG1_VILNIUS_CH2_MEASUREMENT_VALUE_MSB ];
+            
+        }
+        else if ( ( reg >= REG1_VILNIUS_CH3_MEASUREMENT_VALUE_MSB ) &&
+            ( reg <= REG1_VILNIUS_CH3_MEASUREMENT_VALUE_LSB ) ) {
+            
+            double val;            
+            val = calculateMeasurement( 3 );
+            
+            // Set data
+            uint8_t *p = (uint8_t *)&val;
+            rv = p[ reg - REG1_VILNIUS_CH3_MEASUREMENT_VALUE_MSB ];
+            
         }
         
     } // page 1
