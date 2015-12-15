@@ -149,25 +149,25 @@
         </reg>
         
         <reg page="0" offset="10" default="4" bgcolor="0xebd69d" >
-            <name lang="en">Zone I/O channel 0</name>
+            <name lang="en">Zone for I/O channel 0</name>
             <description lang="en">Zone for I/O channel 0</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="11" default="4" bgcolor="0xebd69d">
-            <name lang="en">Sub zone I/O channel 0</name>
+            <name lang="en">Sub zone fo I/O channel 0</name>
             <description lang="en">Sub zone for I/O channel 0</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="12" default="5" bgcolor="0xfff3d4" >
-            <name lang="en">Zone I/O channel 1</name>
+            <name lang="en">Zone for I/O channel 1</name>
             <description lang="en">Zone for I/O channel 1</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="13" default="5" bgcolor="0xfff3d4">
-            <name lang="en">Sub zone I/O channel 1</name>
+            <name lang="en">Sub zone for I/O channel 1</name>
             <description lang="en">Sub zone for I/O channel 1</description>
             <access>rw</access>
         </reg>

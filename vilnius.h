@@ -100,6 +100,8 @@
 #define IO1_INPUT               PORTCbits.RC4
 #define IO0_OUTPUT              LATCbits.LATC5
 #define IO1_OUTPUT              LATCbits.LATC4
+#define IO0_DIR                 TRISCbits.RC5
+#define IO1_DIR                 TRISCbits.RC4
 
 // -----------------------------------------------
 
@@ -379,8 +381,8 @@
 #define VSCP_EEPROM_BOOTLOADER_FLAG             0x00	// Reserved for bootloader
 
 #define VSCP_EEPROM_NICKNAME                    0x01	// Persistant nickname id storage
-#define VSCP_EEPROM_SEGMENT_CRC                 0x02	// Persistant segment crc storage
-#define VSCP_EEPROM_CONTROL                     0x03	// Persistant control byte
+#define VSCP_EEPROM_CONTROL0                    0x02	// Persistant segment crc storage
+#define VSCP_EEPROM_CONTROL1                    0x03	// Persistant control byte
 
 //#define EEPROM_ZONE                           0x04	// Zone node belongs to
 //#define EEPROM_SUBZONE                        0x05	// Subzone node belongs to
@@ -438,6 +440,8 @@ void sendDMatrixInfo(void);
 void SendInformationEvent(unsigned char channel, unsigned char eventClass, unsigned char eventTypeId);
 void SendAlarmEvent( uint8_t channel  );
 void SendDataEvent( uint8_t eventType, uint8_t sensoridx, uint16_t val );
+void sendMeasurementEvent( uint8_t channel );
+void handleSyncRequest( uint8_t sensoridx, uint8_t zone, uint8_t subzone );
 
 // Handle DM
 void doDM(void);

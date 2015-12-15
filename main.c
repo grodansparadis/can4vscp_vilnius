@@ -34,7 +34,6 @@
 #include "vscp_projdefs.h"
 
 #include <xc.h>
-//#include <p18cxxx.h>
 #include <timers.h>
 #include <delays.h>
 #include <inttypes.h>
@@ -463,7 +462,19 @@ void main()
 
                     }
                     else {    
+
                         doDM();
+                        
+                        // Check for sync request
+                        if ( ( VSCP_CLASS1_CONTROL == vscp_imsg.vscp_class ) &&
+                                ( VSCP_TYPE_CONTROL_SYNC == vscp_imsg.vscp_type ) ) {
+                            
+                            handleSyncRequest( vscp_imsg.data[ 0 ], 
+                                                    vscp_imsg.data[ 1 ], 
+                                                    vscp_imsg.data[ 2 ] );
+                            
+                        }
+                        
                     }
                     
                 }               
@@ -629,7 +640,7 @@ void init_app_eeprom(void)
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_IO0_ZONE ], 5 );
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_IO0_SUBZONE ], 5 );
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_IO1_ZONE ], 6 );
-    eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_IO0_SUBZONE ], 6 );
+    eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_IO1_SUBZONE ], 6 );
     
     eeprom_write( reg2eeprom_pg0[ REG0_VILNIUS_CONTROL_MODULE ], DEFAULT_VILNIUS_CONTROL_MODULE );
             
@@ -716,6 +727,7 @@ void doWork(void)
 {
     uint16_t report_interval;
     
+    // For each analog channel
     for ( int i=0; i<4; i++ ) {
         
         //*********************************************************************
@@ -730,6 +742,7 @@ void doWork(void)
                             ( analog_value[ i ] >> 8 ) );
             eeprom_write( reg2eeprom_pg0[REG0_VILNIUS_ABSOLUT_LOW_CHANNEL0_LSB + 2*i ], 
                             ( analog_value[ i ] & 0xff ) );
+            
         }
 
         //*********************************************************************
@@ -836,7 +849,6 @@ void doWork(void)
             
         }
         
-        
         //*********************************************************************
         // Periodic measurement events
         //*********************************************************************
@@ -848,39 +860,8 @@ void doWork(void)
         // Must be enabled >0 
         if ( report_interval && ( measurementReports[ i ] > report_interval ) ) {
         
-            uint8_t data[8];
-            double val;
+            sendMeasurementEvent( i );
             
-            measurementReports[ i ] = 0;
-            
-            val = calculateMeasurement( i );
-            
-            // Floating point value 0v10100000
-            // unit from control settings (bits 3,4)
-            // Channel as index
-            data[ 0 ] = 
-                    ( 0b10100000 | ( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*i ] ) & 
-                                                        MEASUREMENT_CTRL_UNIT_MASK ) ) + i; 
-            
-            // Set data
-            uint8_t *p = (uint8_t *)&val;
-            data[ 4 ] = p[ 3 ];
-            data[ 3 ] = p[ 2 ];
-            data[ 2 ] = p[ 1 ];
-            data[ 1 ] = p[ 0 ];
-            
-            uint16_t vscpclass = (( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*i ] ) & 
-                                                    MEASUREMENT_CTRL_CLASS_BIT_8 ) ? 512 : 0 ) +
-                                                    eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH0 + 3*i ] );
-            uint8_t vscptype = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH0 + 3*i ] );
-                    
-            sendVSCPFrame( vscpclass,
-                                vscptype,
-                                vscp_nickname,
-                                VSCP_PRIORITY_NORMAL,
-                                5,
-                                data );
-        
         }
         
     }
@@ -908,12 +889,12 @@ void doWork(void)
                         
                         SendInformationEvent( 0, 
                                                 VSCP_CLASS1_CONTROL,
-                                                VSCP_TYPE_CONTROL_TURNON );
+                                                VSCP_TYPE_CONTROL_TURNOFF );
                     }   
                     else {
                         SendInformationEvent( 0, 
                                                 VSCP_CLASS1_INFORMATION,
-                                                VSCP_TYPE_INFORMATION_ON );
+                                                VSCP_TYPE_INFORMATION_OFF );
                     }
                     
                 }
@@ -930,12 +911,12 @@ void doWork(void)
                         
                         SendInformationEvent( 0, 
                                                 VSCP_CLASS1_CONTROL,
-                                                VSCP_TYPE_CONTROL_TURNOFF );
+                                                VSCP_TYPE_CONTROL_TURNON );
                     }   
                     else {
                         SendInformationEvent( 0, 
                                                 VSCP_CLASS1_INFORMATION,
-                                                VSCP_TYPE_INFORMATION_OFF );
+                                                VSCP_TYPE_INFORMATION_ON );
                     }
                     
                 }
@@ -972,12 +953,12 @@ void doWork(void)
                         
                         SendInformationEvent( 1, 
                                                 VSCP_CLASS1_CONTROL,
-                                                VSCP_TYPE_CONTROL_TURNON );
+                                                VSCP_TYPE_CONTROL_TURNOFF );
                     }   
                     else {
                         SendInformationEvent( 1, 
                                                 VSCP_CLASS1_INFORMATION,
-                                                VSCP_TYPE_INFORMATION_ON );
+                                                VSCP_TYPE_INFORMATION_OFF );
                     }
                     
                 }
@@ -994,12 +975,12 @@ void doWork(void)
                         
                         SendInformationEvent( 1, 
                                                 VSCP_CLASS1_CONTROL,
-                                                VSCP_TYPE_CONTROL_TURNOFF );
+                                                VSCP_TYPE_CONTROL_TURNON );
                     }   
                     else {
                         SendInformationEvent( 1, 
                                                 VSCP_CLASS1_INFORMATION,
-                                                VSCP_TYPE_INFORMATION_OFF );
+                                                VSCP_TYPE_INFORMATION_ON );
                     }
                     
                 }
@@ -1022,12 +1003,11 @@ void doWork(void)
 
 void doApplicationOneSecondWork(void)
 {
-    
+    ;
 }
 
 double calculateMeasurement( uint8_t sendoridx )
 {
-    uint8_t data[8];
     uint8_t floatBuf[4];
             
     floatBuf[ 0 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_K_3 + 4*sendoridx ] );
@@ -1041,16 +1021,178 @@ double calculateMeasurement( uint8_t sendoridx )
     floatBuf[ 2 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_1 + 4*sendoridx ] );
     floatBuf[ 3 ] = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_CH0_LINEARIZATION_M_0 + 4*sendoridx ] );
     double m = *((double *)floatBuf);
+                            
+    // Do calculation                
+    return  (k*analog_value[ sendoridx ]*MODULE_VOLTAGE)/MODULE_AD_MAX_VALUE + m;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// SendInformationEvent
+//
+
+void SendInformationEvent( unsigned char channel,
+                            unsigned char eventClass,
+                            unsigned char eventTypeId )
+{
+    uint8_t data[3];
+
+    data[ 0 ] = channel; // Register
+    data[ 1 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_IO0_ZONE + 2*( channel & 0x03 ) ] );
+    data[ 2 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_IO0_ZONE + 2*( channel & 0x03 ) + 1 ] );
+    sendVSCPFrame( eventClass,
+                    eventTypeId,
+                    vscp_nickname,
+                    VSCP_PRIORITY_MEDIUM,
+                    3,
+                    data );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// SendDataEvent
+//
+
+void SendDataEvent( uint8_t eventType, uint8_t sensoridx, uint16_t val )
+{
+    uint8_t data[5];
+
+    data[ 0 ] = 0b01100000 + sensoridx; // Coding integer, default unit, channel
+    data[ 1 ] = 0; // Send as 32-bit integer to take care of sign - always positive.
+    data[ 2 ] = 0;        
+    data[ 3 ] = ( val >> 8 ) & 0xff;
+    data[ 4 ] = ( val & 0xff );
+    sendVSCPFrame( VSCP_CLASS1_DATA,
+                    eventType,
+                    vscp_nickname,
+                    VSCP_PRIORITY_MEDIUM,
+                    5,
+                    data );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// SendAlarmEvent
+//
+
+void SendAlarmEvent( uint8_t channel  )
+{
+    uint8_t data[3];
+
+    data[ 0 ] = channel;    // Channel 0-3 for counter, channel 4-6 for frequency low, channel 7-9 for 
+                            // frequency high
+    data[ 1 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CH0_ZONE + ( channel & 0x03 ) ] );
+    data[ 2 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CH0_SUBZONE + ( channel & 0x03 ) ] );
+    sendVSCPFrame( VSCP_CLASS1_ALARM,
+                    VSCP_TYPE_ALARM_ALARM,
+                    vscp_nickname,
+                    VSCP_PRIORITY_HIGH,
+                    3,
+                    data );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Send measurement event for selected channel
+//
+
+void sendMeasurementEvent( uint8_t channel )
+{
+    uint8_t data[8];
+    double val;
             
-    // Floating point value 0v10100000
+    measurementReports[ channel ] = 0;    // New period
+            
+    val = calculateMeasurement( channel );
+            
+    // Floating point value 0b10100000
     // unit from control settings (bits 3,4)
     // Channel as index
     data[ 0 ] = 
-                ( 0b10100000 | ( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*sendoridx ] ) & 
-                                                        MEASUREMENT_CTRL_UNIT_MASK ) ) + sendoridx; 
-                
-    // Do calculation                
-    return  (k*analog_value[ sendoridx ]*MODULE_VOLTAGE)/MODULE_AD_MAX_VALUE + m;
+            ( 0b10100000 | ( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*channel ] ) & 
+                                                        MEASUREMENT_CTRL_UNIT_MASK ) ) + channel; 
+            
+    // Set data
+    uint8_t *p = (uint8_t *)&val;
+    data[ 4 ] = p[ 3 ];
+    data[ 3 ] = p[ 2 ];
+    data[ 2 ] = p[ 1 ];
+    data[ 1 ] = p[ 0 ];
+            
+    uint16_t vscpclass = (( eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_SETTING_CH0 + 3*channel ] ) & 
+                                                    MEASUREMENT_CTRL_CLASS_BIT_8 ) ? 512 : 0 ) +
+                                                    eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_CLASS_CH0 + 3*channel ] );
+    uint8_t vscptype = eeprom_read( reg2eeprom_pg1[ REG1_VILNIUS_LINEARIZATION_EVENT_TYPE_CH0 + 3*channel ] );
+                    
+    sendVSCPFrame( vscpclass,
+                    vscptype,
+                    vscp_nickname,
+                    VSCP_PRIORITY_NORMAL,
+                    5,
+                    data );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Handle sync request
+//
+// if sensoridx is 0xff send info for all sensors
+//      otherwise coded as  type:sensors (each four bits)
+//      type = 0 - Lower bits are A/D channels
+//      type = 1 - Lower bits are measurements
+//      type = 2 - Lower bits are I/O
+// if zone is 0xff send for all zones
+// if zubzone is 0xff send for all subzones
+
+void handleSyncRequest( uint8_t sensoridx, uint8_t zone, uint8_t subzone )
+{
+    // sensoridx coding: type [7,6,5,4], sensors [3,2,1,0]
+    BOOL bADChannels = FALSE;
+    BOOL bMeasurements = FALSE;
+    BOOL bIO = FALSE;
+    
+    // if zone is 0xff send for all zones if not module zone must match
+    if ( ( 0xff != zone ) && ( zone != eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ZONE ] ) ) ) return;
+    
+    // if subzone is 0xff send for all sub zones if not module sub zone must match
+    if ( ( 0xff != subzone ) && ( subzone != eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SUBZONE ] ) ) ) return;
+    
+    // Should all sensors be reported
+    if ( 0xf0 == ( sensoridx & 0xf0 ) ) {
+        // All
+        bADChannels = TRUE;
+        bMeasurements = TRUE;
+        bIO = TRUE;
+    }
+    
+    // A/D channels
+    if ( bADChannels ) {     
+        for ( int i=0; i<4; i++ ) {            
+            if ( sensoridx & ( 1 << i ) ) {
+                SendDataEvent( VSCP_TYPE_DATA_AD, i, analog_value[ i ] );
+            }            
+        }        
+    }
+    
+    // Measurements
+    if ( bMeasurements ) {
+        for ( int i=0; i<4; i++ ) {
+            if ( sensoridx & ( 1 << i ) ) {
+                sendMeasurementEvent( i );
+            }
+        }        
+    }
+    
+    // I/O channels
+    if ( bIO ) {     
+        uint8_t data[3];
+
+        data[ 0 ] = 0b0110000; // Coding integer, default unit, channel = 0
+        data[ 1 ] = 0; // Send as 16-bit integer to take care of sign - always positive.
+        data[ 2 ] = IO0_INPUT | ( IO1_INPUT << 1 );        
+        sendVSCPFrame( VSCP_CLASS1_DATA,
+                    VSCP_TYPE_DATA_IO,
+                    vscp_nickname,
+                    VSCP_PRIORITY_MEDIUM,
+                    3,
+                    data );
+    }
 }
 
 
@@ -1213,9 +1355,8 @@ uint8_t vscp_readAppReg(uint8_t reg)
             rv = eeprom_read( reg2eeprom_pg0[ reg ] );
         }
         // IO status register
-        if ( reg == REG0_VILNIUS_IO_STATE ) {
-            rv = ( ( PORTCbits.RC5 & 0b00100000) >> 4 ) |
-                    ( ( PORTCbits.RC4 & 0b00010000) >> 4 );
+        else if ( reg == REG0_VILNIUS_IO_STATE ) {
+            rv = IO0_INPUT | ( IO1_INPUT << 1 );
         }
         
     } // page 0
@@ -1307,7 +1448,14 @@ uint8_t vscp_writeAppReg( uint8_t reg, uint8_t val )
             rv = eeprom_read( reg2eeprom_pg0[ reg ] );
         }
         else if ( ( reg >= REG0_VILNIUS_AD_VALUE_CHANNEL0_MSB ) && 
-                       ( reg <= REG0_VILNIUS_CONTROL_IO ) ) {
+                       ( reg <= REG0_VILNIUS_ABSOLUT_HIGH_CHANNEL3_LSB ) ) {            
+            eeprom_write( reg2eeprom_pg0[ reg ], val );
+            rv = eeprom_read( reg2eeprom_pg0[ reg ] );
+        }
+        // IO control register
+        else if ( reg == REG0_VILNIUS_CONTROL_IO ) {
+            IO0_DIR = ( val & 1);
+            IO1_DIR = ( (val >> 1) & 1);
             eeprom_write( reg2eeprom_pg0[ reg ], val );
             rv = eeprom_read( reg2eeprom_pg0[ reg ] );
         }
@@ -1317,8 +1465,7 @@ uint8_t vscp_writeAppReg( uint8_t reg, uint8_t val )
             IO0_OUTPUT = ( val & 0x01 ) ? 1 : 0;
             IO1_OUTPUT = ( val & 0x02 ) ? 1 : 0;
             
-            rv = ( ( IO0_INPUT & 0b00100000) >> 4 ) |
-                    ( ( IO1_INPUT & 0b00010000) >> 4 );
+            rv =  ( IO1_INPUT << 1 ) | IO0_INPUT;
             
         }
         
@@ -1371,68 +1518,7 @@ void sendDMatrixInfo(void)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-// SendInformationEvent
-//
 
-void SendInformationEvent( unsigned char channel,
-                            unsigned char eventClass,
-                            unsigned char eventTypeId )
-{
-    uint8_t data[3];
-
-    data[ 0 ] = channel; // Register
-    data[ 1 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ZONE ] );
-    data[ 2 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SUBZONE + ( channel & 0x03 ) ] );
-    sendVSCPFrame( eventClass,
-                    eventTypeId,
-                    vscp_nickname,
-                    VSCP_PRIORITY_MEDIUM,
-                    3,
-                    data );
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// SendDataEvent
-//
-
-void SendDataEvent( uint8_t eventType, uint8_t sensoridx, uint16_t val )
-{
-    uint8_t data[5];
-
-    data[ 0 ] = 0b01100000 + sensoridx; // Coding integer, default unit, channel
-    data[ 1 ] = 0; // Send as 32-bit integer to take care of sign - always positive.
-    data[ 2 ] = 0;        
-    data[ 3 ] = ( val >> 8 ) & 0xff;
-    data[ 4 ] = ( val & 0xff );
-    sendVSCPFrame( VSCP_CLASS1_DATA,
-                    eventType,
-                    vscp_nickname,
-                    VSCP_PRIORITY_MEDIUM,
-                    5,
-                    data );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// SendAlarmEvent
-//
-
-void SendAlarmEvent( uint8_t channel  )
-{
-    uint8_t data[3];
-
-    data[ 0 ] = channel;    // Channel 0-3 for counter, channel 4-6 for frequency low, channel 7-9 for 
-                            // frequency high
-    data[ 1 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CH0_ZONE + ( channel & 0x03 ) ] );
-    data[ 2 ] = eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_CH0_SUBZONE + ( channel & 0x03 ) ] );
-    sendVSCPFrame( VSCP_CLASS1_ALARM,
-                    VSCP_TYPE_ALARM_ALARM,
-                    vscp_nickname,
-                    VSCP_PRIORITY_HIGH,
-                    3,
-                    data );
-}
 
 
 
@@ -1649,30 +1735,13 @@ void vscp_setNickname(uint8_t nickname)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//  getSegmentCRC
-//
-
-uint8_t vscp_getSegmentCRC(void)
-{
-    return eeprom_read( VSCP_EEPROM_SEGMENT_CRC );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//  setSegmentCRC
-//
-
-void vscp_setSegmentCRC(uint8_t crc)
-{
-    eeprom_write( VSCP_EEPROM_SEGMENT_CRC, crc );
-}
-
-///////////////////////////////////////////////////////////////////////////////
 //  setVSCPControlByte
 //
 
-void vscp_setControlByte(uint8_t ctrl)
+void vscp_setControlByte( uint8_t idx, uint8_t ctrl)
 {
-    eeprom_write(VSCP_EEPROM_CONTROL, ctrl);
+    if ( idx > 1) return;
+    eeprom_write(VSCP_EEPROM_CONTROL0 + idx, ctrl);
 }
 
 
@@ -1680,10 +1749,20 @@ void vscp_setControlByte(uint8_t ctrl)
 //  getVSCPControlByte
 //
 
-uint8_t vscp_getControlByte(void)
+uint8_t vscp_getControlByte( uint8_t idx )
 {
-    return eeprom_read(VSCP_EEPROM_CONTROL);
+    return eeprom_read( VSCP_EEPROM_CONTROL0 + idx );
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//  vscp_init_pstorage
+//
+
+void vscp_init_pstorage( void )
+{
+    init_app_eeprom();
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //  vscp_getEmbeddedMdfInfo
@@ -1728,7 +1807,7 @@ void vscp_goBootloaderMode( uint8_t algorithm )
 
 void vscp_getMatrixInfo(char *pData)
 {
-    vscp_omsg.data[ 0 ] = DESCION_MATRIX_ROWS;  // Matrix is seven rows
+    vscp_omsg.data[ 0 ] = DESCION_MATRIX_ROWS;  // Number of matrix rows
     vscp_omsg.data[ 1 ] = REG_DESCION_MATRIX;   // Matrix start offset
     vscp_omsg.data[ 2 ] = 0;                    // Matrix start page
     vscp_omsg.data[ 3 ] = DESCION_MATRIX_PAGE;
