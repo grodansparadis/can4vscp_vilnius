@@ -1138,7 +1138,7 @@ void sendMeasurementEvent( uint8_t channel )
 //      type = 1 - Lower bits are measurements
 //      type = 2 - Lower bits are I/O
 // if zone is 0xff send for all zones
-// if zubzone is 0xff send for all subzones
+// if zubzone is 0xff send for all sub zones
 
 void handleSyncRequest( uint8_t sensoridx, uint8_t zone, uint8_t subzone )
 {
@@ -1601,6 +1601,36 @@ void doDM(void)
                     case VILNIUS_ACTION_NOOP:
                         break;
                         
+                    case VILNIUS_ACTION_SET:
+                        actionSet( eeprom_read( DECISION_MATRIX_EEPROM_START + 
+                                        (8 * i) + 
+                                        VSCP_DM_POS_ACTIONPARAM ) );
+                        break;
+        
+                    case VILNIUS_ACTION_CLEAR:
+                        actionClear( eeprom_read( DECISION_MATRIX_EEPROM_START + 
+                                        (8 * i) + 
+                                        VSCP_DM_POS_ACTIONPARAM ) );
+                        break;
+
+                    case VILNIUS_ACTION_TOGGLE:
+                        actionToggle( eeprom_read( DECISION_MATRIX_EEPROM_START + 
+                                        (8 * i) + 
+                                        VSCP_DM_POS_ACTIONPARAM ) );
+                        break;
+                        
+                    case VILNIUS_ACTION_STATUS:
+                        actionStatus( eeprom_read( DECISION_MATRIX_EEPROM_START + 
+                                        (8 * i) + 
+                                        VSCP_DM_POS_ACTIONPARAM ) );
+                        break;
+                        
+                    case VILNIUS_ACTION_STATUSALL:
+                        actionStatusAll( eeprom_read( DECISION_MATRIX_EEPROM_START + 
+                                        (8 * i) + 
+                                        VSCP_DM_POS_ACTIONPARAM ) );
+                        break;
+                        
                 } // case
                 
             } // Filter/mask
@@ -1610,6 +1640,74 @@ void doDM(void)
     } // for each row
     
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// actionSet
+//
+
+void actionSet( uint8_t param )
+{
+    if ( param & 1 ) {
+        IO0_OUTPUT = 1;
+    }
+    
+    if ( param & 2 ) {
+        IO1_OUTPUT = 1;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// actionClear
+//
+
+void actionClear( uint8_t param )
+{
+    if ( param & 1 ) {
+        IO0_OUTPUT = 0;
+    }
+    
+    if ( param & 2 ) {
+        IO1_OUTPUT = 0;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// actionToggle
+//
+
+void actionToggle( uint8_t param )
+{
+    if ( param & 1 ) {
+        IO0_OUTPUT = IO0_OUTPUT ? 0 : 1;
+    }
+    
+    if ( param & 2 ) {
+        IO1_OUTPUT = IO1_OUTPUT ? 0 : 1;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// actionStatus
+//
+
+void actionStatus( uint8_t param )
+{
+    handleSyncRequest( param, 
+                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ZONE ] ), 
+                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SUBZONE ] ) );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// actionStatusAll
+//
+
+void actionStatusAll( uint8_t param )
+{
+    handleSyncRequest( 0xff, 
+                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_ZONE ] ), 
+                        eeprom_read( reg2eeprom_pg0[ REG0_VILNIUS_SUBZONE ] ) );
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

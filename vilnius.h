@@ -419,11 +419,11 @@
 // --------------------------------------------------------------------------------
 
 #define VILNIUS_ACTION_NOOP                     0
-#define VILNIUS_ACTION_START                    1
-#define VILNIUS_ACTION_STOP                     2
-#define VILNIUS_ACTION_CLEAR                    3
-#define VILNIUS_ACTION_RELOAD                   4
-#define VILNIUS_ACTION_COUNT                    5
+#define VILNIUS_ACTION_SET                      1
+#define VILNIUS_ACTION_CLEAR                    2
+#define VILNIUS_ACTION_TOGGLE                   3
+#define VILNIUS_ACTION_STATUS                   4
+#define VILNIUS_ACTION_STATUSALL                5
 
 // --------------------------------------------------------------------------------
 
@@ -445,6 +445,13 @@ void handleSyncRequest( uint8_t sensoridx, uint8_t zone, uint8_t subzone );
 
 // Handle DM
 void doDM(void);
+
+// Actions
+void actionSet( uint8_t param );
+void actionClear( uint8_t param );
+void actionToggle( uint8_t param );
+void actionStatus( uint8_t param );
+void actionStatusAll( uint8_t param );
 
 // Do application work
 void doApplicationOneSecondWork(void);

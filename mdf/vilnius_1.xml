@@ -4,8 +4,8 @@
 <module>
     <name>Vilnius A/D module</name>
     <model>B</model>
-    <version>5</version>
-    <changed>2015-12-10</changed>
+    <version>6</version>
+    <changed>2015-12-16</changed>
     <description lang="en">
         With this VSCP module it is possible to measure voltage 
         on four channels and to read/write two digital I/O
@@ -820,8 +820,8 @@
                 Bit 3 - Reserved.\n
                 Bit 4 - Enable event on change I/O channel 0.\n
                 Bit 5 - Enable event on change I/O channel 1.\n
-                Bit 6 - Reserved.\n
-                Bit 7 - Reserved.
+                Bit 6 - Send TurnOn/TurnOff instead of OFF/OFF on I/O channel 0.\n
+                Bit 7 - Send TurnOn/TurnOff instead of OFF/OFF on I/O channel 1.
             </description>
             <access>rw</access>
             <bit pos="0" default="false" >
