@@ -89,3 +89,5 @@
 *.s#4
 *.s#5
 *.s#6
+/Vilnius.X/nbproject/*.properties
+/Vilnius.X/nbproject/*.mk
