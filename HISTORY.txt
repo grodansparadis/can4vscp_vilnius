@@ -1,4 +1,5 @@
 Accra counter module
 ====================
 
+2016-03-08 AKHE - Adopted to 1.6 firmware. Adopted for PIC18F26K80.
 2015-11-15 AKHE - Started development

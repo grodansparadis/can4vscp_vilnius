@@ -4,7 +4,7 @@
  * VSCP (Very Simple Control Protocol)
  * http://www.vscp.org
  *
- * Copyright (C) 2015 Ake Hedman, Grodans Paradis AB
+ * Copyright (C) 2015-2016 Ake Hedman, Grodans Paradis AB
  *                          <akhe@grodansparadis.com>
  *
  *  This work is licensed under the Creative Common 
@@ -91,8 +91,8 @@
 #define IO1_INPUT               PORTCbits.RC4
 #define IO0_OUTPUT              LATCbits.LATC5
 #define IO1_OUTPUT              LATCbits.LATC4
-#define IO0_DIR                 TRISCbits.RC5
-#define IO1_DIR                 TRISCbits.RC4
+#define IO0_DIR                 TRISC5
+#define IO1_DIR                 TRISC4
 
 // -----------------------------------------------
 

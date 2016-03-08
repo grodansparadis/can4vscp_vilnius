@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=Vilnius.X
 
 # Active Configuration
-DEFAULTCONF=Relocated
+DEFAULTCONF=Debug_2580
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release Relocated 
+ALLCONFS=Debug_2580 Relocated_2580 Relocated_26K80 Debug_26K80 
 
 
 # build
@@ -45,17 +45,19 @@ ALLCONFS=Debug Release Relocated
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug clean
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Release clean
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_2580 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_2580 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_26K80 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_26K80 clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug build
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Release build
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_2580 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_2580 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_26K80 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_26K80 build
 
 
 

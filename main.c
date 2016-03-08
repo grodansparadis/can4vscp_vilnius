@@ -29,12 +29,14 @@
 #include <delays.h>
 #include <inttypes.h>
 #include <string.h>
-#include <ecan.h>
+#include <ECAN.h>
 #include <vscp_firmware.h>
 #include <vscp_class.h>
 #include <vscp_type.h>
 #include "vilnius.h"
 #include "version.h"
+
+#if defined(_18F2580) 
 
 #if defined(RELEASE)
 
@@ -73,6 +75,43 @@
 #pragma config EBTR3 = OFF
 
 #pragma config EBTRB = OFF
+
+#endif
+
+
+#else if defined(_18F25K80) || defined(_18F26K80) || defined(_18F45K80) || defined(_18F46K80) || defined(_18F65K80) || defined(_18F66K80)
+
+
+// CONFIG1L
+#pragma config SOSCSEL = DIG    // RC0/RC is I/O
+#pragma config RETEN = OFF      // Ultra low-power regulator is Disabled (Controlled by REGSLP bit).
+#pragma config INTOSCSEL = HIGH // LF-INTOSC in High-power mode during Sleep.
+#pragma config XINST = OFF      // No extended instruction set
+
+// CONFIG1H
+#pragma config FOSC = HS2       // Crystal 10 MHz
+#pragma config PLLCFG = ON      // 4 x PLL
+
+// CONFIG2H
+#pragma config WDTPS = 1048576  // Watchdog prescaler
+#pragma config BOREN = SBORDIS  // Brown out enabled
+#pragma config BORV  = 1        // 2.7V
+
+// CONFIG3H
+#pragma config CANMX = PORTB    // ECAN TX and RX pins are located on RB2 and RB3, respectively.
+#pragma config MSSPMSK = MSK7   // 7 Bit address masking mode.
+#pragma config MCLRE = ON       // MCLR Enabled, RE3 Disabled.
+
+// CONFIG4L
+#pragma config STVREN = ON      // Stack Overflow Reset enabled
+#pragma config BBSIZ = BB2K     // Boot block size 2K
+
+#ifdef DEBUG
+#pragma config WDTEN = OFF      // WDT disabled in hardware; SWDTEN bit disabled.
+#else
+#pragma config WDTEN = ON       // WDT enabled in hardware; 
+#endif
+
 
 #endif
 
@@ -548,10 +587,16 @@ void init()
     OpenTimer0( TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_8 );
     WriteTimer0( TIMER0_RELOAD_VALUE );
     
+#if defined(_18F2580)     
     OpenADC(ADC_FOSC_64 & ADC_RIGHT_JUST & ADC_20_TAD,
             ADC_CH0 & ADC_INT_ON & ADC_11ANA &
             ADC_VREFPLUS_VDD & ADC_VREFMINUS_VSS,
             15);
+#else if defined(_18F25K80) || defined(_18F26K80) || defined(_18F45K80) || defined(_18F46K80) || defined(_18F65K80) || defined(_18F66K80)
+    OpenADC(ADC_FOSC_64 & ADC_RIGHT_JUST & ADC_20_TAD,
+                ADC_CH0 & ADC_INT_ON,
+                15);
+#endif   
 
     // Initialize CAN
     ECANInitialize();
