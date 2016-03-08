@@ -5,7 +5,8 @@
  *  Vilnius A/D module
  *  ==================
  *
- *  Copyright (C) 2015 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 2015-2016 Ake Hedman, Grodans Paradis AB
+ *                          http://www.grodansparadis.com
  *                          <akhe@grodansparadis.com>
  *
  *  This work is licensed under the Creative Common 
