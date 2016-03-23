@@ -26,7 +26,14 @@
 //
 // Described in vscp.h
 
-#define ENABLE_WRITE_2PROTECTED_LOCATIONS // Enable write to protected locations
+// Enable error reporting
+#define VSCP_FIRMWARE_ENABLE_ERROR_REPORTING
+
+// Enable write to protected locations
+#define ENABLE_WRITE_2PROTECTED_LOCATIONS 
+
+// Enable logging functionality
+#define VSCP_FIRMWARE_ENABLE_LOGGING
 
 // EEPROM bigger then 256 bytes
 //#define EEADRH

@@ -96,3 +96,17 @@
 /Vilnius.X/dist/Relocated_26K80/
 /Vilnius.X/build/Debug_2580/
 /Vilnius.X/dist/Debug_2580/
+/Vilnius.X/build/Relocated_2580/production/_ext/1472/*.p1
+/Vilnius.X/build/Relocated_2580/production/_ext/1472/*.d
+/Vilnius.X/build/Relocated_2580/production/_ext/1472/*.pre
+/Vilnius.X/build/Relocated_2580/production/_ext/1935753226/*.p1
+/Vilnius.X/build/Relocated_2580/production/_ext/1935753226/*.d
+/Vilnius.X/build/Relocated_2580/production/_ext/1935753226/*.pre
+/Vilnius.X/dist/Relocated_2580/production/*.cmf
+/Vilnius.X/dist/Relocated_2580/production/*.hxl
+/Vilnius.X/dist/Relocated_2580/production/*.lst
+/Vilnius.X/dist/Relocated_2580/production/*.map
+/Vilnius.X/dist/Relocated_2580/production/*.rlf
+/Vilnius.X/dist/Relocated_2580/production/*.sdb
+/Vilnius.X/dist/Relocated_2580/production/*.sym
+/Vilnius.X/nbproject/*.bash
