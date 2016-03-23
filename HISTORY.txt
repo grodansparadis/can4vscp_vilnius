@@ -1,5 +1,7 @@
-Accra counter module
-====================
+Vilnius A/D converter module
+============================
 
+2016-03-23 AKHE - Version 1.0.3------------------------------------------------
+2016-03-23 AKHE - Adopter to VSCP firmware 1.6.1
 2016-03-08 AKHE - Adopted to 1.6 firmware. Adopted for PIC18F26K80.
 2015-11-15 AKHE - Started development

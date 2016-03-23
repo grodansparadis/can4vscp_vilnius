@@ -110,3 +110,5 @@
 /Vilnius.X/dist/Relocated_2580/production/*.sdb
 /Vilnius.X/dist/Relocated_2580/production/*.sym
 /Vilnius.X/nbproject/*.bash
+/Vilnius.X/dist/Relocated_2580/
+/Vilnius.X/build/Relocated_2580/
