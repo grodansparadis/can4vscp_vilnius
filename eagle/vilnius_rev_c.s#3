@@ -18490,6 +18490,10 @@ Digikey ED2737ND</description>
 </sheet>
 <sheet>
 <plain>
+<text x="139.7" y="132.08" size="1.778" layer="91">Channel 0</text>
+<text x="139.7" y="116.84" size="1.778" layer="91">Channel 1</text>
+<text x="139.7" y="96.52" size="1.778" layer="91">Channel 2</text>
+<text x="139.7" y="73.66" size="1.778" layer="91">Channel 3</text>
 </plain>
 <instances>
 <instance part="FRAME2" gate="G$1" x="0" y="0"/>

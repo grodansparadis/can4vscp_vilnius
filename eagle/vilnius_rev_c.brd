@@ -1022,7 +1022,7 @@ design rules under a new name.</description>
 <element name="R107" library="rcl" package="R0805" value="10K" x="9.67" y="30.64" smashed="yes" rot="R270">
 <attribute name="NAME" x="10.428" y="31.236" size="1.016" layer="25" font="fixed"/>
 </element>
-<element name="C8" library="rcl" package="C0805" value="1 uF" x="56.34" y="30.19" smashed="yes" rot="R180">
+<element name="C8" library="rcl" package="C0805" value="10 uF" x="56.34" y="30.19" smashed="yes" rot="R180">
 <attribute name="NAME" x="58.33" y="32.61" size="1.27" layer="25" font="fixed" rot="R180"/>
 </element>
 <element name="R17" library="rcl" package="R0805" value="120" x="41.43" y="10.11" smashed="yes" rot="R180">

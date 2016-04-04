@@ -17780,7 +17780,7 @@ Digikey ED2737ND</description>
 <part name="R11" library="rcl" deviceset="R-EU_" device="R0805" value="1K"/>
 <part name="LED9" library="led" deviceset="LED" device="CHIP-LED0805"/>
 <part name="P+9" library="SUPPLY1" deviceset="VCC" device=""/>
-<part name="C8" library="rcl" deviceset="C-EU" device="C0805" value="1 uF"/>
+<part name="C8" library="rcl" deviceset="C-EU" device="C0805" value="10 uF"/>
 <part name="GND2" library="SUPPLY1" deviceset="GND" device=""/>
 <part name="R17" library="rcl" deviceset="R-EU_" device="R0805" value="120"/>
 <part name="PAD1" library="wirepad" deviceset="1,6/0,8" device=""/>

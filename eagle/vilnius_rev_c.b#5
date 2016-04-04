@@ -1276,13 +1276,6 @@ design rules under a new name.</description>
 <via x="43.58" y="28.24" extent="1-16" drill="0.6" shape="square"/>
 <via x="36.09" y="28.19" extent="1-16" drill="0.6" shape="square"/>
 <via x="14.53" y="14.32" extent="1-16" drill="0.6" shape="square"/>
-<wire x1="44.09" y1="30.19" x2="53.64" y2="30.19" width="0" layer="19" extent="1-16"/>
-<wire x1="43.57" y1="29.59" x2="44.09" y2="30.19" width="0" layer="19" extent="1-16"/>
-<wire x1="41.825" y1="29.59" x2="43.57" y2="29.59" width="0" layer="19" extent="1-16"/>
-<wire x1="53.64" y1="30.19" x2="53.64" y2="30.19" width="0" layer="19" extent="1-16"/>
-<wire x1="43.57" y1="29.59" x2="43.57" y2="29.59" width="0" layer="19" extent="1-16"/>
-<wire x1="43.18" y1="27.94" x2="43.18" y2="29.21" width="0" layer="19" extent="1-16"/>
-<wire x1="43.18" y1="29.21" x2="43.57" y2="29.59" width="0" layer="19" extent="1-16"/>
 <wire x1="43.18" y1="27.94" x2="43.58" y2="28.24" width="0.2032" layer="1"/>
 </signal>
 <signal name="TXCAN">

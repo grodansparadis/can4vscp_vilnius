@@ -23,7 +23,7 @@
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
@@ -89,6 +89,18 @@
 <wire x1="0" y1="42" x2="72" y2="42" width="0" layer="20"/>
 <wire x1="72" y1="42" x2="72" y2="0" width="0" layer="20"/>
 <wire x1="72" y1="0" x2="0" y2="0" width="0" layer="20"/>
+<text x="3.2" y="39.8" size="0.8128" layer="26" rot="MR0">GND</text>
+<text x="3.3" y="36.4" size="0.8128" layer="26" rot="MR0">IN0-A</text>
+<text x="3.2" y="32.8" size="0.8128" layer="26" rot="MR0">IN0-B</text>
+<text x="3.3" y="29.4" size="0.8128" layer="26" rot="MR0">IN1-A</text>
+<text x="3.2" y="25.8" size="0.8128" layer="26" rot="MR0">IN1-B</text>
+<text x="3.3" y="22.5" size="0.8128" layer="26" rot="MR0">IN2-A</text>
+<text x="3.4" y="19" size="0.8128" layer="26" rot="MR0">IN2-B</text>
+<text x="3.5" y="15.5" size="0.8128" layer="26" rot="MR0">IN3-A</text>
+<text x="3.5" y="11.9" size="0.8128" layer="26" rot="MR0">IN3-B</text>
+<text x="3" y="1.4" size="0.8128" layer="26" rot="MR0">+5V</text>
+<text x="3.1" y="8.5" size="0.8128" layer="26" rot="MR0">I/O-0</text>
+<text x="3" y="4.9" size="0.8128" layer="26" rot="MR0">I/O-1</text>
 </plain>
 <libraries>
 <library name="con-lstb">
