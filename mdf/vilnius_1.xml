@@ -5,15 +5,15 @@
     <name>Vilnius A/D module</name>
     <model>B</model>
     <version>7</version>
-    <changed>2016-03-07</changed>
+    <changed>2018-06-11</changed>
     <description lang="en">
-        With this VSCP module it is possible to measure voltage 
+        With this VSCP module which can measure voltage 
         on four channels and to read/write two digital I/O
     </description>
     <infourl>http://www.grodansparadis.com/vilnius/vilnius.html</infourl>
     <buffersize>8</buffersize>
     <manufacturer>
-        <name>Paradise of the Frog AB</name>
+        <name>Grodans Paradis AB</name>
         <address>
             <street>Brattbergavägen 17</street>
             <city>Los</city>
@@ -43,7 +43,7 @@
     </manufacturer>  
     
     <!-- Picture of device -->
-    <picture path="http://www.grodansparadis.com/accra/images/accra14.png" 
+    <picture path="https://www.grodansparadis.com/vilnius/images/vilnius2_small.png" 
         format="jpg" >
         <description lang="en" >
         Picture of the Vilnius A/D module.
@@ -51,7 +51,7 @@
     </picture>
     
     <!-- Firmware for the device -->
-    <firmware path="http://www.auto.grodansparadis.com/accra/downloads/firmware_accra_relocated_1_0_0.hex" 
+    <firmware path="http://www.eurosource.se/vilnius_1.xml" 
         format="intelhex8"
         date="2015-07-07"
         version_major="1"
@@ -63,7 +63,7 @@
     </firmware>
     
     <!-- Full documentation for the device -->
-    <manual path="http://www.grodansparadis.com/accra/manual/doku.php?id=start"     
+    <manual path="http://www.grodansparadis.com/vilnius/manual/doku.php?id=start"     
         lang="en"
         format="html">
         <description lang="en" >
