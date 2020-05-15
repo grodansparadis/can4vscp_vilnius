@@ -2,7 +2,7 @@
  * 	VSCP (Very Simple Control Protocol) 
  * 	http://www.vscp.org
  *
- *  Copyright (C) 1995-2016 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 1995-2020 Ake Hedman, Grodans Paradis AB
  *  <akhe@grodansparadis.com>
  *
  *  This work is licensed under the Creative Common 
@@ -25,7 +25,7 @@
 
 #define FIRMWARE_MAJOR_VERSION		1
 #define FIRMWARE_MINOR_VERSION		0
-#define FIRMWARE_SUB_MINOR_VERSION	3
+#define FIRMWARE_SUB_MINOR_VERSION	4
 
 
 

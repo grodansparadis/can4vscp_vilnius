@@ -5,7 +5,7 @@
  * 	http://www.vscp.org
  *
  *
- *  Copyright (C) 1995-2016 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 1995-2020-https://github.com/grodansparadis/can4vscp_paris/releases/download/v1.1.6/paris_relay_pic18f26k80_1_1_6_relocated.hex Ake Hedman, Grodans Paradis AB
  *                          <akhe@grodansparadis.com>
  *
  *  This work is licensed under the Creative Common 
@@ -26,40 +26,40 @@
 
 
 // EEPROM Storage
-#define VSCP_EEPROM_BOOTLOADER_FLAG         0x00    // Reserved for bootloader	 
-
-#define VSCP_EEPROM_NICKNAME                0x01    // Persistant nickname id storage
-#define VSCP_EEPROM_SEGMENT_CRC             0x02    // Persistant segment crc storage
-#define VSCP_EEPROM_CONTROL                 0x03    // Persistant control byte
-
-#define VSCP_EEPROM_REG_USERID              0x04
-#define VSCP_EEPROM_REG_USERID1             0x05
-#define VSCP_EEPROM_REG_USERID2             0x06
-#define VSCP_EEPROM_REG_USERID3             0x07
-#define VSCP_EEPROM_REG_USERID4             0x08
-
-// The following can be stored in flash or eeprom
-
-#define VSCP_EEPROM_REG_MANUFACTUR_ID0      0x09
-#define VSCP_EEPROM_REG_MANUFACTUR_ID1      0x0A
-#define VSCP_EEPROM_REG_MANUFACTUR_ID2      0x0B
-#define VSCP_EEPROM_REG_MANUFACTUR_ID3      0x0C
-
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID0   0x0D
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID1   0x0E
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID2   0x0F
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID3   0x10
-
-// The following can be stored in program ROM (recommended) or in EEPROM 
-
-#define VSCP_EEPROM_REG_GUID                0x11	// Start of GUID MSB	
-                                                    //      0x11 - 0x20
-
-#define VSCP_EEPROM_REG_DEVICE_URL          0x21	// Start of Device URL storage
-                                                    //      0x21 - 0x40
-
-#define VSCP_EEPROM_END                     0x41	// marks end of VSCP EEPROM usage
-                                                    //   (next free position)
+//#define VSCP_EEPROM_BOOTLOADER_FLAG         0x00    // Reserved for bootloader	 
+//
+//#define VSCP_EEPROM_NICKNAME                0x01    // Persistant nickname id storage
+//#define VSCP_EEPROM_SEGMENT_CRC             0x02    // Persistant segment crc storage
+//#define VSCP_EEPROM_CONTROL                 0x03    // Persistant control byte
+//
+//#define VSCP_EEPROM_REG_USERID              0x04
+//#define VSCP_EEPROM_REG_USERID1             0x05
+//#define VSCP_EEPROM_REG_USERID2             0x06
+//#define VSCP_EEPROM_REG_USERID3             0x07
+//#define VSCP_EEPROM_REG_USERID4             0x08
+//
+//// The following can be stored in flash or eeprom
+//
+//#define VSCP_EEPROM_REG_MANUFACTUR_ID0      0x09
+//#define VSCP_EEPROM_REG_MANUFACTUR_ID1      0x0A
+//#define VSCP_EEPROM_REG_MANUFACTUR_ID2      0x0B
+//#define VSCP_EEPROM_REG_MANUFACTUR_ID3      0x0C
+//
+//#define VSCP_EEPROM_REG_MANUFACTUR_SUBID0   0x0D
+//#define VSCP_EEPROM_REG_MANUFACTUR_SUBID1   0x0E
+//#define VSCP_EEPROM_REG_MANUFACTUR_SUBID2   0x0F
+//#define VSCP_EEPROM_REG_MANUFACTUR_SUBID3   0x10
+//
+//// The following can be stored in program ROM (recommended) or in EEPROM 
+//
+//#define VSCP_EEPROM_REG_GUID                0x11	// Start of GUID MSB	
+//                                                    //      0x11 - 0x20
+//
+//#define VSCP_EEPROM_REG_DEVICE_URL          0x21	// Start of Device URL storage
+//                                                    //      0x21 - 0x40
+//
+//#define VSCP_EEPROM_END                     0x41	// marks end of VSCP EEPROM usage
+//                                                    //   (next free position)
 
 // Function Prototypes
 

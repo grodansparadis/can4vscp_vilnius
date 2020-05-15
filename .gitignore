@@ -42,6 +42,8 @@
 /eagle/*.b#3
 /eagle/*.pro
 /eagle/*.s#1
+eagle/vilnius_rev_c.b#8
+eagle/vilnius_rev_c.s#7
 /Vilnius.X/build/Debug/debug/_ext/1472/*.p1
 /Vilnius.X/build/Debug/debug/_ext/1472/*.d
 /Vilnius.X/build/Debug/debug/_ext/1472/*.pre

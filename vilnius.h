@@ -4,7 +4,7 @@
  * VSCP (Very Simple Control Protocol)
  * http://www.vscp.org
  *
- * Copyright (C) 2015-2016 Ake Hedman, Grodans Paradis AB
+ * Copyright (C) 2015-2020 Ake Hedman, Grodans Paradis AB
  *                          <akhe@grodansparadis.com>
  *
  *  This work is licensed under the Creative Common 
@@ -375,8 +375,8 @@
 #define VSCP_EEPROM_CONTROL0                    0x02	// Persistant segment crc storage
 #define VSCP_EEPROM_CONTROL1                    0x03	// Persistant control byte
 
-//#define EEPROM_ZONE                           0x04	// Zone node belongs to
-//#define EEPROM_SUBZONE                        0x05	// Subzone node belongs to
+#define EEPROM_ZONE                             0x04	// Zone node belongs to
+#define EEPROM_SUBZONE                          0x05	// Subzone node belongs to
 
 #define VSCP_EEPROM_REG_USERID                  0x06
 #define VSCP_EEPROM_REG_USERID1                 0x07
