@@ -5,7 +5,7 @@
     <name>Vilnius A/D module</name>
     <model>B</model>
     <version>7</version>
-    <changed>2018-06-11</changed>
+    <changed>2020-05-15</changed>
     <description lang="en">
         With this VSCP module which can measure voltage 
         on four channels and to read/write two digital I/O
@@ -17,7 +17,7 @@
         <address>
             <street>Brattbergavägen 17</street>
             <city>Los</city>
-            <postcode>82050</postcode>
+            <postcode>82770</postcode>
             <country>Sweden</country>
         </address>
         <telephone>
@@ -51,7 +51,46 @@
     </picture>
     
     <!-- Firmware for the device -->
-    <firmware path="http://www.eurosource.se/vilnius_1.xml" 
+    <files>
+    
+    <firmware target="pic18f2558"
+    	path="https://github.com/grodansparadis/can4vscp_vilnius/releases/download/v1.04/Vilnius_pic18f2580_1_0_4_relocated.hex" 
+        format="intelhex8"
+        date="2020-05-15"
+        version_major="1"
+        version_minor="0"
+        version_subminor="4">
+        <description lang="en" >
+        Firmware (PIC18F2580) for the Vilnius A/D module for use with the VSCP Bootloader wizard.
+        </description> 
+    </firmware>
+    
+    <firmware target="pic18f26k58"
+    	path="https://github.com/grodansparadis/can4vscp_vilnius/releases/download/v1.0.3/Vilnius_2580_1_0_3.hex" 
+        format="intelhex8"
+        date="2016-03-23"
+        version_major="1"
+        version_minor="0"
+        version_subminor="4">
+        <description lang="en" >
+        Firmware (PIC18F26K80) for the Vilnius A/D module for use with the VSCP Bootloader wizard.
+        </description> 
+    </firmware>
+    
+    <firmware target="pic18f2558"
+    	path="https://github.com/grodansparadis/can4vscp_vilnius/releases/download/v1.0.0/Vilnius_1.0.0.hex" 
+        format="intelhex8"
+        date="2015-07-07"
+        version_major="1"
+        version_minor="0"
+        version_subminor="3">
+        <description lang="en" >
+        Firmware for the Vilnius A/D module for use with the VSCP Bootloader wizard.
+        </description> 
+    </firmware>
+    
+    <firmware target="pic18f2558"
+    	path="https://github.com/grodansparadis/can4vscp_vilnius/releases/download/v1.0.0/Vilnius_1.0.0.hex" 
         format="intelhex8"
         date="2015-07-07"
         version_major="1"
@@ -61,6 +100,8 @@
         Firmware for the Vilnius A/D module for use with the VSCP Bootloader wizard.
         </description> 
     </firmware>
+    
+    </files>
     
     <!-- Full documentation for the device -->
     <manual path="http://www.grodansparadis.com/vilnius/manual/doku.php?id=start"     
