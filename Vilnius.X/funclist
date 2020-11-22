@@ -75,7 +75,7 @@ _sendMeasurementEvent: CODE, 15706 0 334
 _ECANInitialize: CODE, 17836 0 144
 ___fladd: CODE, 15018 0 352
 _OpenTimer0: CODE, 20128 0 30
-_interrupt_at_low_vector: CODE, 24 0 316
+_interrupt_at_low_vector: CODE, 2072 0 316
 _doApplicationOneSecondWork: CODE, 20534 0 2
 i1_WriteTimer0: CODE, 20428 0 18
 _OpenADC: CODE, 19018 0 74

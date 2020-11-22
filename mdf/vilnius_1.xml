@@ -4,8 +4,8 @@
 <module>
     <name>Vilnius A/D module</name>
     <model>B</model>
-    <version>7</version>
-    <changed>2020-05-15</changed>
+    <version>8</version>
+    <changed>2020-11-22</changed>
     <description lang="en">
         With this VSCP module which can measure voltage 
         on four channels and to read/write two digital I/O
@@ -536,32 +536,32 @@
         </reg>
         
         <reg page="0" offset="29" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D report interval channel 0 (MSB)</name>
-            <description lang="en">16-bit report interval in milliseconds for channel 0. MSB byte.</description>
+            <name lang="en">A/D report interval channel 1 (MSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 1. MSB byte.</description>
             <access>rw</access>
         </reg>
         
         <reg page="0" offset="30" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D report interval channel 0 (LSB)</name>
-            <description lang="en">16-bit report interval in milliseconds for channel 0. LSB byte.</description>
-            <access>rw</access>
-        </reg>
-        
-        <reg page="0" offset="31" default="0" bgcolor="0xF9EAE3">
-            <name lang="en">A/D report interval channel 0 (MSB)</name>
-            <description lang="en">16-bit report interval in milliseconds for channel 0. MSB byte.</description>
-            <access>rw</access>
-        </reg>
-        
-        <reg page="0" offset="32" default="0" bgcolor="0xF9EAE3">
             <name lang="en">A/D report interval channel 1 (LSB)</name>
             <description lang="en">16-bit report interval in milliseconds for channel 1. LSB byte.</description>
             <access>rw</access>
         </reg>
         
-        <reg page="0" offset="33" default="0" bgcolor="0xF9EAE3">
+        <reg page="0" offset="31" default="0" bgcolor="0xF9EAE3">
             <name lang="en">A/D report interval channel 2 (MSB)</name>
             <description lang="en">16-bit report interval in milliseconds for channel 2. MSB byte.</description>
+            <access>rw</access>
+        </reg>
+        
+        <reg page="0" offset="32" default="0" bgcolor="0xF9EAE3">
+            <name lang="en">A/D report interval channel 2 (LSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 2. LSB byte.</description>
+            <access>rw</access>
+        </reg>
+        
+        <reg page="0" offset="33" default="0" bgcolor="0xF9EAE3">
+            <name lang="en">A/D report interval channel 3 (MSB)</name>
+            <description lang="en">16-bit report interval in milliseconds for channel 3. MSB byte.</description>
             <access>rw</access>
         </reg>
         
