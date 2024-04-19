@@ -361,11 +361,11 @@
 
 //      Page 2
 
-#define DESCION_MATRIX_PAGE                     3
+#define DESCION_MATRIX_PAGE                     2
 #define DESCION_MATRIX_ROWS                     4
 #define REG_DESCION_MATRIX                      0    // Start of matrix
 
-#define NUMBER_OF_REGISTER_PAGES                5
+#define NUMBER_OF_REGISTER_PAGES                3
 
 // * * * Persistent storage
 
