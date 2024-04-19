@@ -4,8 +4,8 @@
 <module>
     <name>Vilnius A/D module</name>
     <model>B</model>
-    <version>8</version>
-    <changed>2020-11-22</changed>
+    <version>9</version>
+    <changed>2024-04-19</changed>
     <description lang="en">
         With this VSCP module which can measure voltage 
         on four channels and to read/write two digital I/O
